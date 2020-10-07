@@ -1,5 +1,6 @@
 html,
 body {
+  background-color: #8A817C;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -13,4 +14,63 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.grid-produtos {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.background {
+  background-color: #8A817C;
+  width: 100%;
+  height: 80vh;
+  padding: 0px 100px;
+}
+
+.business-menu {
+  font-size: 69px;
+  line-height: 102px; 
+  color: #D28A74;
+}
+
+.carrinho {
+  font-size: 40px;
+  line-height: 59px;
+  color: #000000;
+}
+
+.navbar {
+  width: 100%;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.nome-loja {
+  text-align: center;
+}
+
+/* CSS DA CAIXA DO PRODUTO */
+
+.product-container {
+  width: 60%;
+  height: 190px;
+  background: #F4F3EE;
+  border-radius: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+}
+
+.product-img {
+  width: 174px;
+  height: 163px;
+  background: #C4C4C4;
+  border-radius: 11px;
 }
