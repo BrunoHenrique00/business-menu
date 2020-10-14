@@ -1,16 +1,15 @@
 const express = require('express')
-
 const app = express()
+const productRoutes = require('./routes/productRoutes.js')
+const lojasRoutes = require('./routes/lojasRoutes.js')
 
-app.get('/lojas/:id', (req,res)=>{
-    
-})
 
-app.get('/produtos', (req,res)=>{
-    
-})
+app.use('/lojas', lojasRoutes )
 
-app.listen('3000', ()=>{
-    console.log('servidor está funcionando rocha gay: http://localhost:3000/')
+
+app.use('/produtos', productRoutes )
+
+app.listen('3001', ()=>{
+    console.log('O servidor está funcionando: http://localhost:3001/')
 })
 
