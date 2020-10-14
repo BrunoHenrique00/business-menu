@@ -2,17 +2,27 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 
 
-const produtos = ['Arroz', 'Bedida', 'Café', 'Chocolate','Arroz', 'Bedida', 'Café', 'Chocolate']
+const produtos = ['Cafe', 'Picole', 'Camarao', 'Balinha','Lagosta', 'Laranja', 'Chocolatinho', 'Leitinho', 'Cigarro']
 
 function Produto({titulo}){
-  return(
-    <div className="product-container flex">
-      <div className="product-img">
 
+  return(
+    <div>
+      <div className="product-container flex">
+        <div className="product-img">
+
+        </div>
+        <div className="product-info">
+          <h2>{titulo}</h2>
+          <p>Preço R$: 20.00</p>
+          <button className='button'>
+            <span> Veja mais </span>
+          </button>
+        </div>
       </div>
-      <div className="product-info">
-        <h2>{titulo}</h2>
-        <p>Preço R$: 20.00</p>
+      <div className='button-flex'>
+        <button className='button'>+</button>
+        <button className='button'>-</button>
       </div>
     </div>
   )
@@ -25,7 +35,7 @@ export default function Home() {
         <h1 className="business-menu">Business Menu</h1>
         <p className="carrinho">Carrinho</p>
     </div>
-    <h2 className="nome-loja">[NOME DA EMPRESA]</h2>
+    <h2 className="nome-loja">[Nome Empresa]</h2>
     <div className="grid-produtos background">
       {produtos.map((titulo) => <Produto titulo={titulo} />)}
     </div>  
