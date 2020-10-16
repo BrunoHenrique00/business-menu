@@ -1,9 +1,16 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
-import { useRouter } from 'next/router'
 
-
-const produtos = ['Arroz', 'Bedida', 'Café', 'Chocolate','Arroz', 'Bedida', 'Café', 'Chocolate']
+const database = [
+  {
+    loja: 'Blend',
+    produtos: ['Arroz', 'Feijao','Arroz', 'Feijao']
+  },
+  {
+    loja: 'Brunos',
+    produtos: ['Cachaça', 'Vodka','cerveja', 'Litrao']
+  },
+]
 
 function Produto({titulo}){
   return(
@@ -19,19 +26,32 @@ function Produto({titulo}){
   )
 }
 
-export default function Home() {
-    const router = useRouter()
-    const loja = router.query.nomeLoja
+export default function Home({nomeLoja, produtos}) {
+
   return (
     <>
     <div className="navbar">
         <h1 className="business-menu">Business Menu</h1>
         <p className="carrinho">Carrinho</p>
     </div>
-    <h2 className="nome-loja">{loja}</h2>
+    <h2 className="nome-loja">{nomeLoja}</h2>
     <div className="grid-produtos background">
-      {produtos.map((titulo) => <Produto titulo={titulo} />)}
+      {produtos.map( produto => <Produto titulo={produto} />)}
     </div>  
     </>
   )
+}
+
+export async function getServerSideProps({params}) {
+
+  const nomeLoja = params.nomeLoja
+
+  const resultLoja = database.find( item => item.loja === nomeLoja )
+
+  return {
+    props: {
+      nomeLoja: params.nomeLoja,
+      produtos: resultLoja.produtos
+    }, // will be passed to the page component as props
+  }
 }
