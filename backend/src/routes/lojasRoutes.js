@@ -1,12 +1,7 @@
 const express = require('express')
 const routes = express.Router()
 
-const lojas = [
-    'Blend',
-    'Barbosinha',
-    'Bar do Mou',
-    'Bar do Juca'
-];
+const lojas = require('../database/lojas')
 
 routes.get('/:id', function (req, res) {
     const id = req.params.id;
