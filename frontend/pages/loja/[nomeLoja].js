@@ -4,7 +4,7 @@ import styles from '../../styles/Home.module.css'
 const database = [
   {
     loja: 'Blend',
-    produtos: ['Arroz', 'Feijao','Arroz', 'Feijao']
+    produtos: ['Tio Dandan', 'Feijao','Arroz', 'Daniel']
   },
   {
     loja: 'Brunos',

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import styles from '../../styles/Home.module.css'
 
 
@@ -21,8 +22,8 @@ function Produto({titulo}){
         </div>
       </div>
       <div className='button-flex'>
-        <button className='button'>+</button>
-        <button className='button'>-</button>
+        <button className='button-ad'>+</button>
+        <button className='button-ad'>-</button>
       </div>
     </div>
   )
@@ -34,6 +35,7 @@ export default function Home() {
     <div className="navbar">
         <h1 className="business-menu">Business Menu</h1>
         <p className="carrinho">Carrinho</p>
+        
     </div>
     <h2 className="nome-loja">[Nome Empresa]</h2>
     <div className="grid-produtos background">

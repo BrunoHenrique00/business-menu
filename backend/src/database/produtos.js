@@ -1,13 +1,13 @@
 const produtos = [
     {
         loja_id: 1,
-        nome: 'Chocolate',
-        preco: 2
+        nome: 'Coxinha',
+        preco: 4
     },
     {
         loja_id: 1,
-        nome: '',
-        preco: 2
+        nome: 'Beijinho',
+        preco: 5
     },
     {
         loja_id: 1,
@@ -23,6 +23,16 @@ const produtos = [
         loja_id: 2,
         nome: 'Batata',
         preco: 10
+    },
+    {
+        loja_id: 2,
+        nome: 'Refrigerante',
+        preco: 10
+    },
+    {
+        loja_id: 3,
+        nome: 'Suco de Pêra',
+        preco: 4
     },
 ]
 

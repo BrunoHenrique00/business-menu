@@ -1,8 +1,16 @@
 const lojas = [
-    'Blend',
-    'Barbosinha',
-    'Bar do Mou',
-    'Bar do Juca'
+    {
+        id: 1,
+        nome: 'Blend'
+    },
+    {
+        id: 2,
+        nome: 'Barbosinha'
+    },
+    {
+        id: 3,
+        nome: 'Bar do Mou'
+    },
 ];
 
 module.exports = lojas

@@ -16,15 +16,15 @@ routes.get('/:id', function (req, res) {
 })
 
 routes.post('/', (req,res) => {
-    
+    res.send('rota POST')
 })
 
 routes.delete('/', (req,res) => {
-    
+    res.send('rota DELETE')
 })
 
 routes.put('/', (req,res) => {
-    
+    res.send('rota PUT')
 })
 
 module.exports = routes
