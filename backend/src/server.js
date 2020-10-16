@@ -1,21 +1,15 @@
 const express = require('express')
-
 const app = express()
-
-const produtos = ['arroz', 'maca','biscoito']
-
-app.get('/lojas/:id', (req,res)=>{
-    res.send(`Bem vindo a loja ${req.params.id}`)
-})
-
-app.get('/produtos/:id', (req,res)=>{
-    const id = req.params.id
-    res.send(produtos[id])
-})
+const productRoutes = require('./routes/productRoutes.js')
+const lojasRoutes = require('./routes/lojasRoutes.js')
 
 
+app.use('/lojas', lojasRoutes )
 
-app.listen('3001', () =>{
-    console.log('servidor está funcionando: http://localhost:3001/')
+
+app.use('/produtos', productRoutes )
+
+app.listen('3001', ()=>{
+    console.log('O servidor está funcionando: http://localhost:3001/')
 })
 
