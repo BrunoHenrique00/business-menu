@@ -34,6 +34,18 @@ a {
   color: #D28A74;
 }
 
+.button-flex{
+  margin: auto;
+  width: 30%;
+
+  display: flex;
+  
+
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+
 .carrinho {
   font-size: 40px;
   line-height: 59px;
@@ -57,7 +69,8 @@ a {
 /* CSS DA CAIXA DO PRODUTO */
 
 .product-container {
-  width: 60%;
+  max-width: 100%;
+  margin: 0px 20px;
   height: 190px;
   background: #F4F3EE;
   border-radius: 22px;
@@ -73,4 +86,69 @@ a {
   height: 163px;
   background: #C4C4C4;
   border-radius: 11px;
+}
+/* CSS DO BUTAO VEJA MAIS */
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #D28A74;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  height: 60px;
+  font-size: 16px;
+  padding: 10px;
+  width: 85%;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button:hover{
+  background:  #353434;
+}
+ /* botão de adicionar e remover*/
+.button-ad{
+  display: inline-block;
+  border-radius: 60px;
+  background-color: #D28A74;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  height: 60px;
+  font-size: 2.6rem;
+  color: #000000;
+  padding: 10px;
+  width: 60px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.button-ad:hover{
+  background:  rgb(250, 166, 140);
+}
+/* ************** */
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
 }
