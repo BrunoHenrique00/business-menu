@@ -25,7 +25,7 @@ export default function Home() {
         <h1 className="business-menu">Business Menu</h1>
         <p className="carrinho">Carrinho</p>
     </div>
-    <h2 className="nome-loja">[NOME DA EMPRESA]</h2>
+    <h2 className="nome-loja">[Business Menus]</h2>
     <div className="grid-produtos background">
       {produtos.map((titulo) => <Produto titulo={titulo} />)}
     </div>  
