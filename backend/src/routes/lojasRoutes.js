@@ -3,12 +3,12 @@ const routes = express.Router()
 
 const lojas = require('../database/lojas')
 
-routes.get('/:id', function (req, res) {
-    const id = req.params.id;
-    const resultado = lojas.find(loja => loja === id)
+routes.get('/:nomeLoja', function (req, res) {
+    const nomeLoja = req.params.nomeLoja;
+    const resultado = lojas.find(loja => loja.nome === nomeLoja)
     
     if(resultado !== undefined){
-        return res.send('Bem vindo à loja ' + resultado);
+        return res.send('Bem vindo à loja ' + resultado.nome);
     }
 
     res.send('Não achamos a loja que voce queria');
