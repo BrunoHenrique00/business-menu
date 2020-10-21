@@ -23,9 +23,8 @@ const database = [
     produtos : ['Coxinha','Pão de queijo','Esfirra','Presunto e Queijo','Misto quente','Refrigerante','Café','Suco']
   },
   {
-    loja: "Oficina Hookah Lounge"
+    loja: "Oficina Hookah Lounge",
     produtos : ['Rosh simples','Rosh duplo','Rosh Triplo','Cerveja','Caipirinha','Cigarro']
-
   },
 ]
 
@@ -70,13 +69,13 @@ export default function Home({nomeLoja, produtos}) {
 
 export async function getServerSideProps({params}) {
 
-  const nomeLoja = params.nomeLoja
+  const nomeLoja = params.nomeloja
 
   const resultLoja = database.find( item => item.loja === nomeLoja )
 
   return {
     props: {
-      nomeLoja: params.nomeLoja,
+      nomeLoja: params.nomeloja,
       produtos: resultLoja.produtos
     }, 
   }
