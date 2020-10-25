@@ -1,32 +1,14 @@
 const express = require('express')
 const routes = express.Router()
 
-const produtos = require('../database/produtos')
-const lojas = require('../database/lojas')
+const controller = require('../controllers/produtosController')
 
-routes.get('/:nomeLoja', (req,res) => {
-    const nomeLoja = req.params.nomeLoja
-    const resultadoLoja = lojas.find(loja => loja.nome === nomeLoja)
-    
-    if(resultadoLoja !== undefined){
-        const resultProducts = produtos.filter( produto => produto.loja_id === resultadoLoja.id)
-        res.json(resultProducts)
-    }else{
-        res.json({ message: 'Não achamos esta loja :('})
-    }
+routes.get('/:nomeLoja', controller.get)
 
-})
+routes.post('/', controller.post)
 
-routes.post('/', (req,res) => {
-    
-})
+routes.delete('/', controller.delete)
 
-routes.delete('/', (req,res) => {
-    
-})
-
-routes.put('/', (req,res) => {
-    
-})
+routes.put('/', controller.put)
 
 module.exports = routes
