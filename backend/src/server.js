@@ -5,6 +5,7 @@ const lojasRoutes = require('./routes/lojasRoutes.js')
 
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 
 app.use('/lojas', lojasRoutes )
 app.use('/produtos', productRoutes )
