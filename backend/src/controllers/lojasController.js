@@ -1,19 +1,23 @@
-const lojas = require('../database/lojas')
+const knex = require('../database/index')
 
-module.exports.get = function (req, res) {
+module.exports.get = async (req, res) => {
     const nomeLoja = req.params.nomeLoja;
-    const resultado = lojas.find(loja => loja.nome === nomeLoja)
-    
+    const resultado = await knex('lojas').where('nome', nomeLoja)
+    console.log(resultado)
     if(resultado !== undefined){
-        return res.send('Bem vindo à loja ' + resultado.nome);
+        return res.json({
+            nome: resultado[0].nome
+        });
     }
 
     res.send('Não achamos a loja que voce queria');
 
 }
 
-module.exports.post = (req,res) => {
-    res.send('rota POST')
+module.exports.post = async (req,res) => {
+    const { nome } = req.body
+    await knex('lojas').insert({ nome })
+    res.send('Loja cadastrada com sucesso ' + nome )
 } 
 
 module.exports.delete = (req,res) => {

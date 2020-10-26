@@ -1,34 +1,6 @@
 import Head from 'next/head'
 
-
-const database = [
-  {
-    loja: "DSuplements",
-    produtos: ['Whey', 'Creatina', 'BCAA', 'Glutamina', 'Albumina', 'HMB']
-  },
-  {
-    loja: "Açaí",
-    produtos: ['Açaí', 'Suco de Groselha','Passaporte USA', 'Complementos']
-  },
-  {
-    loja: "Bruno's",
-    produtos: ['Cachaça','Vodka','Cerveja','Litrao']
-  },
-  {
-    loja: "Barbosinha",
-    produtos: ['Frango', 'Carne/Frango', 'Misto', 'Vegetariano', 'Skol', 'Refrigerante']
-  },
-  {
-    loja: "Obelisco",
-    produtos : ['Coxinha','Pão de queijo','Esfirra','Presunto e Queijo','Misto quente','Refrigerante','Café','Suco']
-  },
-  {
-    loja: "Oficina Hookah Lounge",
-    produtos : ['Rosh simples','Rosh duplo','Rosh Triplo','Cerveja','Caipirinha','Cigarro']
-  },
-]
-
-function Produto({titulo}){
+function Produto({titulo, preco}){
   return(
     <div>
       <div className="product-container flex">
@@ -37,7 +9,7 @@ function Produto({titulo}){
         </div>
         <div className="product-info">
           <h2>{titulo}</h2>
-          <p>Preço R$: 20.00</p>
+          <p>Preço R$: {preco.toFixed(2)}</p>
           <button className='button'>
             <span> Veja mais </span>
           </button>
@@ -61,7 +33,7 @@ export default function Home({nomeLoja, produtos}) {
     </div>
     <h2 className="nome-loja">{nomeLoja}</h2>
     <div className="grid-produtos background">
-      {produtos.map( produto => <Produto titulo={produto} />)}
+      {produtos.map( produto => <Produto titulo={produto.nome} preco={produto.preco}/>)}
     </div>  
     </>
   )
@@ -71,12 +43,13 @@ export async function getServerSideProps({params}) {
 
   const nomeLoja = params.nomeloja
 
-  const resultLoja = database.find( item => item.loja === nomeLoja )
+  const data = await fetch(`http://localhost:3001/produtos/${nomeLoja}`) 
+  const { produtos } = await data.json()
 
   return {
     props: {
       nomeLoja: params.nomeloja,
-      produtos: resultLoja.produtos
+      produtos: produtos
     }, 
   }
 }

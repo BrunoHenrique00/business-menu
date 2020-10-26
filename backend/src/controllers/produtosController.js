@@ -1,21 +1,33 @@
-const produtos = require('../database/produtos')
-const lojas = require('../database/lojas')
+const knex = require('../database/index')
 
-module.exports.get = (req,res) => {
-    const nomeLoja = req.params.nomeLoja
-    const resultadoLoja = lojas.find(loja => loja.nome === nomeLoja)
-    
-    if(resultadoLoja !== undefined){
-        const resultProducts = produtos.filter( produto => produto.loja_id === resultadoLoja.id)
-        res.json(resultProducts)
-    }else{
-        res.json({ message: 'Não achamos esta loja :('})
+module.exports.get = async (req,res) => {
+    const { nomeLoja } = req.params
+    const resultadoLoja = await knex('lojas').where('nome', nomeLoja)
+
+    if(resultadoLoja[0] !== undefined){
+        const resultadoProdutos = await knex('produtos').where('loja_id', resultadoLoja[0].id)
+        return res.json({
+            nomeLoja: nomeLoja,
+            produtos: resultadoProdutos
+        })
     }
-
+    else{
+        return res.send('Não encontramos a sua loja >.<');
+    } 
+       
 }
 
-module.exports.post = (req,res) => {
-    res.send('rota POST')
+module.exports.post = async (req,res) => {
+    const { nome, descricao, preco, loja_id } = req.body
+
+    await knex('produtos').insert({ 
+        nome, 
+        descricao, 
+        preco, 
+        loja_id 
+    })
+    
+    res.send('Produto cadastrado com sucesso ( ͡° ͜ʖ ͡°) ' + nome )
 } 
 
 module.exports.delete = (req,res) => {

@@ -152,3 +152,59 @@ a {
   opacity: 1;
   right: 0;
 }
+
+/*detalhes.js*/
+.nome-loja-detalhe {
+
+  text-align: center;
+  background: #8A817C;
+}
+.detalhe {
+  position: absolute;
+  width: 1221px;
+  height: 676px;
+  left: 124px;
+  top: 259px;
+  background: #F2F2F2;
+  border-radius: 10px;
+}
+
+.imagem-produto {
+  
+  width: 576px;
+  height: 421px;
+  left: 159px;
+  top: 291px;
+
+  background: #C4C4C4;
+  border-radius: 4px;
+}
+
+.detalhes-de-produto {
+  height: 300px;
+  width: 523px;
+  left: 806px;
+  top: 483px;
+  
+
+  text-align: justify;
+  Size: 24px;
+  line-height: 35,57px;
+}
+
+.ad-prod {
+  position: center;
+  width: 268px;
+  height: 75px;
+  left: 50%;
+  top: 70%;
+
+  background: #C4C4C4;
+  border: 2px solid #555555;
+  transition: all 0.3s;
+}
+.ad-prod:hover{
+  background-color: #555555;
+  color : white;
+}
+/************/
