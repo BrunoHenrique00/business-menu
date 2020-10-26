@@ -9,9 +9,7 @@ function Produto({titulo}){
   return(
     <div>
       <div className="product-container flex">
-        <div className="product-img">
-
-        </div>
+        <div className="product-img"></div>
         <div className="product-info">
           <h2>{titulo}</h2>
           <p>Preço R$: 20.00</p>
