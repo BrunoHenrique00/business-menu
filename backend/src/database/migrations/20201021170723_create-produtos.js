@@ -5,7 +5,7 @@ exports.up = knex => knex.schema.createTable('produtos', table => {
         table.text('descricao').notNullable()
         table.decimal('preco').notNullable()
 
-        table.integer('loja_id').references('lojas.id')
+        table.integer('loja_id').references('lojas.id').notNullable()
     })
 
 exports.down = knex => knex.schema.dropTable('produtos')
