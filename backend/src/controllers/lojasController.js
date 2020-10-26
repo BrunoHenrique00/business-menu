@@ -3,7 +3,7 @@ const knex = require('../database/index')
 module.exports.get = async (req, res) => {
     const nomeLoja = req.params.nomeLoja;
     const resultado = await knex('lojas').where('nome', nomeLoja)
-    console.log(resultado)
+    
     if(resultado !== undefined){
         return res.json({
             nome: resultado[0].nome
