@@ -2,10 +2,12 @@ const express = require('express')
 const app = express()
 const productRoutes = require('./routes/productRoutes.js')
 const lojasRoutes = require('./routes/lojasRoutes.js')
+const cors = require('cors')
 
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(cors())
 
 app.use('/lojas', lojasRoutes )
 app.use('/produtos', productRoutes )
