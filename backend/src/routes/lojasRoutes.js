@@ -8,6 +8,6 @@ routes.post('/', controller.post)
 
 routes.delete('/', controller.delete)
 
-routes.put('/', controller.put)
+routes.put('/:id', controller.put)
 
 module.exports = routes
