@@ -212,4 +212,16 @@ a {
   background-color: #555555;
   color : white;
 }
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 50%;
+  margin: auto;
+}
+
+.admin-inputs {
+
+}
 /************/
