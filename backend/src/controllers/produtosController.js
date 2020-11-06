@@ -1,5 +1,20 @@
 const knex = require('../database/index')
 
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+
+    destination: (req, file, cb) => {
+        cb(null, 'src/uploads/')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now()+'-'+file.originalname)
+    }
+})
+
+const upload = multer({ storage })
+
+
 module.exports.get = async (req,res,next) => {
     try{
         const { nomeLoja } = req.params
@@ -24,15 +39,19 @@ module.exports.get = async (req,res,next) => {
 module.exports.post = async (req,res,next) => {
     try{
         const { nome, descricao, preco, loja_id } = req.body
-
+        const path_image = req.file.filename
+        
         await knex('produtos').insert({ 
             nome, 
             descricao, 
             preco, 
-            loja_id 
+            loja_id,
+            path_image
         })
         
-        res.send('Produto cadastrado com sucesso ( ͡° ͜ʖ ͡°) ' + nome )
+        res.json({
+            message:'Produto cadastrado com sucesso :) ' + nome 
+        })
     }
     catch (error) {
         error.status = 400
@@ -41,9 +60,37 @@ module.exports.post = async (req,res,next) => {
 } 
 
 module.exports.delete = async (req,res,next) => {
-    res.send('rota DELETE')
+    try{
+        const { id } = req.params
+
+        await knex('produtos').where('id', id ).del()
+
+        res.json({
+            message: 'O produto com id ' + id + ' foi deletado!'
+        })
+    }
+    catch(error){
+        next(error) 
+    }
 }
 
 module.exports.put = async (req,res,next) => {
     res.send('rota PUT')
+}
+
+module.exports.autenticador = async (req,res,next) => {
+    try{
+        const { id } = req.body
+        
+        if( id ){
+            next()
+        }else{
+            return res.json({
+                message: 'ID não verificado'
+            }) 
+        }
+    }
+    catch(error){
+        next(error) 
+    }
 }

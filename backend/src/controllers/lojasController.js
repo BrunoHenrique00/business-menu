@@ -1,4 +1,3 @@
-const { update } = require('../database/index');
 const knex = require('../database/index')
 
 module.exports.get = async (req, res, next) => {
@@ -52,3 +51,21 @@ module.exports.put = async (req,res,next) => {
     }
 }
 
+module.exports.login = async (req,res,next) => {
+    try{
+        const nomeLoja = req.body.nome
+        const [ login ] = await knex('lojas').where('nome', nomeLoja)
+
+        if( login ){
+            res.json({
+                id: login.id
+            })
+        }
+        res.json({
+            message: "Informacoes erradas"
+        })
+     }
+     catch (error) {
+         next(error)
+     }
+}

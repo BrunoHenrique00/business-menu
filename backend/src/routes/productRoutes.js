@@ -5,10 +5,11 @@ const controller = require('../controllers/produtosController')
 
 routes.get('/:nomeLoja', controller.get)
 
-routes.post('/', controller.post)
+routes.post('/', controller.autenticador , controller.post)
 
-routes.delete('/', controller.delete)
+routes.delete('/:id', controller.autenticador , controller.delete)
 
-routes.put('/', controller.put)
+routes.put('/', controller.autenticador ,  controller.put)
+
 
 module.exports = routes
