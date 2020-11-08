@@ -8,7 +8,7 @@ export default function Home() {
           <p className="carrinho">Carrinho</p>
       </div>
 
-      <h2 className="nome-loja-detalhe">Chocolate branco</h2>
+      <h2 className="nome-loja-detalhe">Titio Dedé</h2>
       
       <div className="detalhe">
       
