@@ -163,9 +163,12 @@ a {
 
   text-align: center;
   background: #8A817C;
+  font-family: 'Nunito', Arial, Helvetica, sans-serif;
+  font-size: 32px;
 }
 .detalhe {
-  position: absolute;
+  display: flex;
+  margin: auto;
   width: 1221px;
   height: 676px;
   left: 124px;
@@ -174,36 +177,43 @@ a {
   border-radius: 10px;
 }
 
-.imagem-produto {
-  
-  width: 576px;
+.imagem-produto { 
+  padding-top: 30px;
+  padding-left: 15px;
+  min-width: 50%;
+  max-width: 50%;
   height: 421px;
   left: 159px;
   top: 291px;
-
-  background: #C4C4C4;
-  border-radius: 4px;
+  border-radius: 15px;
 }
-
-.detalhes-de-produto {
-  height: 300px;
-  width: 523px;
-  left: 806px;
-  top: 483px;
+.titulo-preço-detalhe{
+  font-family: 'Nunito', Arial, Helvetica, sans-serif;
+  font-size: 20px;
   
-
+  display: block; 
+  height: 130px;
+  min-width: 50%;
+  max-width: 50%;
+  height: 421px;
+  padding-left: 33px;
+  padding-top: 60px;
+}
+.detalhes-de-produto {
+  position: absolute;
+  height: 280px;
+  width: 520px;
   text-align: justify;
   Size: 24px;
   line-height: 35,57px;
 }
 
 .ad-prod {
-  position: center;
+  position: absolute;
   width: 268px;
   height: 75px;
-  left: 50%;
-  top: 70%;
-
+  bottom: 1%;
+  right: 40%;
   background: #C4C4C4;
   border: 2px solid #555555;
   transition: all 0.3s;
@@ -212,4 +222,76 @@ a {
   background-color: #555555;
   color : white;
 }
-/************/
+
+/********login-adim*********/
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 50%;
+  margin: auto;
+}
+
+.admin-inputs {
+
+}
+/*****************************/
+
+/* registro e login */
+.caixa-login{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  background-color:#C4C4C4;
+  border-radius: 10px;
+  margin:60px;
+  max-height:50%;
+  font-size:18px;
+  
+}
+
+.caixa{
+  width: 100%;
+  display: flex;
+}
+.caixa-registro{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  background-color:#BCB8B1;
+  border-radius: 10px;
+  margin:30px;
+  font-size:18px;
+
+}
+.input{
+ border-radius: 15px;
+ border-style: none;
+ background-color:#8A817C;
+ color: white;
+ width:446px;
+ height:56px;
+ text-align: center;
+}
+
+.input::placeholder{
+  color: white;
+  text-align: center;
+}
+
+.input:focus::placeholder {
+  color: transparent;
+}
+
+
+/*css dos butoes de cada parte*/
+.button-login{
+  margin-top: 20px;
+  
+}
+.button-registrar{
+  /*Dib vai mexer nos 2 rocha nao mexer pfv*/
+}

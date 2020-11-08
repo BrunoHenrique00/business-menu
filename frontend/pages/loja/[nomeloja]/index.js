@@ -1,12 +1,10 @@
 import Head from 'next/head'
 
-function Produto({titulo, preco}){
+function Produto({titulo, preco, path_image}){
   return(
-    <div>
+    <>
       <div className="product-container flex">
-        <div className="product-img">
-
-        </div>
+        <img className="product-img" src={`http://localhost:3001/uploads/${path_image}`} />
         <div className="product-info">
           <h2>{titulo}</h2>
           <p>Preço R$: {preco.toFixed(2)}</p>
@@ -19,11 +17,11 @@ function Produto({titulo, preco}){
         <button className='button-ad'>+</button>
         <button className='button-ad'>-</button>
       </div>
-    </div>
+    </>
   )
 }
 
-export default function Home({nomeLoja, produtos}) {
+export default function Home({nomeLoja, produtos, path_image}) {
 
   return (
     <>
@@ -33,7 +31,7 @@ export default function Home({nomeLoja, produtos}) {
     </div>
     <h2 className="nome-loja">{nomeLoja}</h2>
     <div className="grid-produtos background">
-      {produtos.map( produto => <Produto titulo={produto.nome} preco={produto.preco}/>)}
+      {produtos.map( produto => <Produto titulo={produto.nome} preco={produto.preco} path_image={produto.path_image}/>)}
     </div>  
     </>
   )
@@ -45,6 +43,7 @@ export async function getServerSideProps({params}) {
 
   const data = await fetch(`http://localhost:3001/produtos/${nomeLoja}`) 
   const { produtos } = await data.json()
+  console.log(produtos)
 
   return {
     props: {
