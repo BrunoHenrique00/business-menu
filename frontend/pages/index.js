@@ -30,7 +30,6 @@ export default function Home() {
                 <button className='button button-registrar'>Registrar</button>
             </div>
         </div>
-        
     </>
     )
 

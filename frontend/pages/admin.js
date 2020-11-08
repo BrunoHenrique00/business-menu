@@ -6,23 +6,30 @@ export default function Admin() {
     const [ descricao, setDescricao] = useState('')
     const [ preco, setPreco] = useState(0)
     const [ idLoja, setIdLoja] = useState(0)
+    const [ img, setImg] = useState(null)
 
     async function sendProduct(){
         const precoNumber = parseFloat(preco)
         const idlojaNumber = parseInt(idLoja)
-        const data = {
-            nome: name,
-            descricao,
-            preco: precoNumber,
-            loja_id: idlojaNumber
-        }
+        const formData = new FormData()
+
+        formData.append("img", img[0])
+        formData.append('nome', name)
+        formData.append('descricao', descricao)
+        formData.append('preco', precoNumber)
+        formData.append('loja_id', idlojaNumber)
+        formData.append('id', 1)
+
         const response = await fetch('http://localhost:3001/produtos/',{
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            body: formData
         })
+        const json = await response.json()
+        if(json.error){
+            window.alert('Algo deu errado com a criação do seu produto :( ')
+        }else{
+            window.alert('Seu produto foi criado com sucesso!')
+        }
     }
 
 
@@ -45,6 +52,9 @@ export default function Admin() {
 
             <label>Id da sua loja</label>
             <input type='number'onChange={ (e) => setIdLoja(e.target.value)}/>
+
+            <label>A imagem do seu produto</label>
+            <input type='file'onChange={ (e) => setImg(e.target.files)}/>
             <button onClick={sendProduct} className='button'>Cadastrar produto</button>
         </div>
       </>

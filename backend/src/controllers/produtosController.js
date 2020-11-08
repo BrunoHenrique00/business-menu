@@ -40,6 +40,7 @@ module.exports.post = async (req,res,next) => {
     try{
         const { nome, descricao, preco, loja_id } = req.body
         const path_image = req.file.filename
+        console.log('Infos',req.body, 'File', path_image)
         
         await knex('produtos').insert({ 
             nome, 
@@ -81,7 +82,6 @@ module.exports.put = async (req,res,next) => {
 module.exports.autenticador = async (req,res,next) => {
     try{
         const { id } = req.body
-        
         if( id ){
             next()
         }else{
