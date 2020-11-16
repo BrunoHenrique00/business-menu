@@ -59,31 +59,16 @@ export default function Home() {
         
         <div className="caixa">
             <div className="caixa-login">
-<<<<<<< HEAD
-                <h2> Email:</h2>
-                <input placeholder='Digite seu email' className="input"/>
-                <h2> Senha:</h2>
-                <input type="password" placeholder='Digite sua senha' className="input"/>
-=======
                 <h2> Nome da sua empresa:</h2>
                 <input placeholder='Digite sua empresa' className="input" onChange={ (e) => setUserLogin(e.target.value)}/>
->>>>>>> 8a8df9f52300052a80c6a22acb2777f1567e46b2
 
                 <button className='button button-login' onClick={handleLogin}>Login</button>
             </div>
 
             <div className="caixa-registro">
                 <h2>Nome da Empresa:</h2>
-<<<<<<< HEAD
-                <input placeholder='Digite o nome da empresa' className="input"/>
-                <h2>Email:</h2>
-                <input placeholder='Digite seu email' className="input"/>
-                <h2>Senha:</h2>
-                <input type="password" placeholder='Digite sua senha' className="input"/>
-=======
                 <input placeholder='Digite o nome da empresa' className="input" onChange={ (e) => setUserRegister(e.target.value)}/>
 
->>>>>>> 8a8df9f52300052a80c6a22acb2777f1567e46b2
                 <h2>Numero de Telefone:</h2>
                 <input placeholder='Digite o número de telefone' className="input"/>
 
