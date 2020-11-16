@@ -8,20 +8,16 @@ export default function Home() {
           <p className="carrinho">Carrinho</p>
       </div>
 
-<<<<<<< HEAD
-      <h2 className="nome-loja-detalhe">Titio Dedé</h2>
-=======
-      <h2 className="nome-loja-detalhe">Quente Novamente!</h2>
->>>>>>> 00a492826b0167bbbb4fb0af80e0eb71f175739e
+      <h2 className="nome-loja-detalhe">GELADEIRAS TSUNAMI!</h2>
       
       <div className="detalhe">
       
-      <img src="https://images-ext-2.discordapp.net/external/CxLCiFHkzphGRy7OIgQ5c73Mq5x2MkqJW-kbPTaLjaQ/%3Fwidth%3D453%26height%3D605/https/media.discordapp.net/attachments/686265916958310471/773682464794083368/IMG_20201031_104000.jpg" href="" className="imagem-produto"></img>
+      <img src="https://media.tenor.com/images/e860242d4c92a3fe35e98f2f7449e148/tenor.gif" href="" className="imagem-produto"></img>
 
       <div className="titulo-preço-detalhe">
 
-        <h2 className="titulo">DibStep</h2>
-        <h2 className="preço"> Preço: R$ 2 Skins</h2>
+        <h2 className="titulo"> CAVALOO</h2>
+        <h2 className="preço"> Preço: R$ 2.000,00</h2>
         
         <p className="detalhes-de-produto">
           O texto descritivo é um tipo de texto que apresenta a descrição de algo, seja de uma pessoa, um objeto, um local, etc. Assim, ele expõe apreciações, impressões e observações de algo indicando os aspectos, as características, os detalhes singulares e os pormenores.

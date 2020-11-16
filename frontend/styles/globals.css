@@ -214,6 +214,7 @@ a {
   height: 75px;
   bottom: 1%;
   right: 40%;
+  border-radius: 20px;
   background: #C4C4C4;
   border: 2px solid #555555;
   transition: all 0.3s;
@@ -295,3 +296,9 @@ a {
 .button-registrar{
   /*Dib vai mexer nos 2 rocha nao mexer pfv*/
 }
+
+/* CSS da ADMIN */
+
+
+
+/******************/
