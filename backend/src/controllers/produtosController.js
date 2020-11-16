@@ -1,26 +1,12 @@
 const knex = require('../database/index')
+const fs = require('fs')
 
-const multer = require('multer')
-
-const storage = multer.diskStorage({
-
-    destination: (req, file, cb) => {
-        cb(null, 'src/uploads/')
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now()+'-'+file.originalname)
-    }
-})
-
-const upload = multer({ storage })
-
-
-module.exports.get = async (req,res,next) => {
+module.exports.produtosPorLoja= async (req,res,next) => {
     try{
         const { nomeLoja } = req.params
         const resultadoLoja = await knex('lojas').where('nome', nomeLoja)
-
-        if(resultadoLoja[0] !== undefined){
+        
+        if(resultadoLoja[0]){
             const resultadoProdutos = await knex('produtos').where('loja_id', resultadoLoja[0].id)
             return res.json({
                 nomeLoja: nomeLoja,
@@ -28,7 +14,9 @@ module.exports.get = async (req,res,next) => {
             })
         }
         else{
-            return res.send('Não encontramos a sua loja >.<');
+            return res.json({
+                error: 'Não encontramos a sua loja >.<'
+            });
         } 
     }
     catch (error) {
@@ -36,11 +24,10 @@ module.exports.get = async (req,res,next) => {
     }
 }
 
-module.exports.post = async (req,res,next) => {
+module.exports.adicionaProduto = async (req,res,next) => {
     try{
         const { nome, descricao, preco, loja_id } = req.body
         const path_image = req.file.filename
-        console.log('Infos',req.body, 'File', path_image)
         
         await knex('produtos').insert({ 
             nome, 
@@ -60,14 +47,22 @@ module.exports.post = async (req,res,next) => {
     }
 } 
 
-module.exports.delete = async (req,res,next) => {
+module.exports.deletaProduto = async (req,res,next) => {
     try{
         const { id } = req.params
 
-        await knex('produtos').where('id', id ).del()
+        const [ produto ]  = await knex('produtos').where('id', id )
 
-        res.json({
-            message: 'O produto com id ' + id + ' foi deletado!'
+        fs.unlink(`src/uploads/${produto.path_image}`, async (error) => {
+            if(error){
+                return res.json({ error: error})
+            }else{
+                console.log('A imagem foi deletada')
+                await knex('produtos').where('id', id ).del()
+                return res.json({
+                    message: 'O produto com id ' + id + ' foi deletado!'
+                })
+            }
         })
     }
     catch(error){
