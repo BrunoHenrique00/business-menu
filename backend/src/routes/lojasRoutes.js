@@ -3,13 +3,13 @@ const routes = express.Router()
 const controller = require('../controllers/lojasController')
 const { autenticador } = require('../controllers/produtosController')
 
-routes.get('/:nomeLoja', controller.get)
+routes.post('/', autenticador, controller.get)
 
-routes.post('/register', controller.post)
+routes.post('/register', controller.adicionaLoja)
 
-routes.delete('/:id', autenticador , controller.delete)
+routes.delete('/:id', autenticador , controller.deletaLoja)
 
-routes.put('/:id', autenticador , controller.put)
+routes.put('/:id', autenticador , controller.alteraNomeLoja)
 
 routes.post('/login', controller.login)
 

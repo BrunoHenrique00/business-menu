@@ -3,11 +3,11 @@ const routes = express.Router()
 
 const controller = require('../controllers/produtosController')
 
-routes.get('/:nomeLoja', controller.get)
+routes.get('/:nomeLoja', controller.produtosPorLoja)
 
-routes.post('/', controller.autenticador , controller.post)
+routes.post('/', controller.autenticador , controller.adicionaProduto)
 
-routes.delete('/:id', controller.autenticador , controller.delete)
+routes.delete('/:id', controller.autenticador , controller.deletaProduto)
 
 routes.put('/', controller.autenticador ,  controller.put)
 

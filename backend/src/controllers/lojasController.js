@@ -2,38 +2,40 @@ const knex = require('../database/index')
 
 module.exports.get = async (req, res, next) => {
     try {
-        const nomeLoja = req.params.nomeLoja;
-        const [ resultado ] = await knex('lojas').where('nome', nomeLoja)
+        const { id } = req.body;
+        const produtos  = await knex('produtos').where('loja_id', id)
         
-        if(resultado !== undefined){
+        if(produtos){
             return res.json({
-                nome: resultado.nome
+                produtos: produtos
+            });
+        }else{
+            res.json({
+                error: 'Nao achamos o que queria'
             });
         }
-
-        res.send('Não achamos a loja que voce queria >.<');
     }
     catch (error) {
         next(error)
     }
 }
 
-module.exports.post = async (req,res,next) => {
+module.exports.adicionaLoja = async (req,res,next) => {
     try{
         const { nome } = req.body
         await knex('lojas').insert({ nome })
-        res.send('Loja cadastrada com sucesso ' + nome )
+        res.json({ message:'Loja cadastrada com sucesso ' + nome })
     }
     catch (error) {
         next(error)
     }
 } 
 
-module.exports.delete = async (req,res,next) => {
+module.exports.deletaLoja = async (req,res,next) => {
     res.send('rota DELETE')
 }
 
-module.exports.put = async (req,res,next) => {
+module.exports.alteraNomeLoja = async (req,res,next) => {
    try{
         const id_loja = req.params.id;
         const novo_nome = req.body.nome
@@ -54,16 +56,18 @@ module.exports.put = async (req,res,next) => {
 module.exports.login = async (req,res,next) => {
     try{
         const nomeLoja = req.body.nome
+        
         const [ login ] = await knex('lojas').where('nome', nomeLoja)
 
         if( login ){
             res.json({
                 id: login.id
             })
+        }else{
+            res.json({
+                message: "Informacoes erradas"
+            })
         }
-        res.json({
-            message: "Informacoes erradas"
-        })
      }
      catch (error) {
          next(error)
