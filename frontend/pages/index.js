@@ -54,7 +54,7 @@ export default function Home() {
     <>
         <div className="navbar">
           <h1 className="business-menu">Business Menu</h1>
-          <h2>Página de Registro</h2>
+          <h2 className="pag-registro">Página de Registro</h2>
         </div>
         
         <div className="caixa">

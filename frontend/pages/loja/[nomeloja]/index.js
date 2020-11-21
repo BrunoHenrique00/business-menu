@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { useState } from 'react'
 
-function Produto({titulo, preco, path_image, nomeLoja, descricao}){
+function Produto({titulo, preco, path_image, nomeLoja, descricao, addCart , removeCart}){
   return(
     <div>
       <div className="product-container flex">
@@ -30,8 +31,8 @@ function Produto({titulo, preco, path_image, nomeLoja, descricao}){
       </div>
 
       <div className='button-flex'>
-        <button className='button-adicionar'>+</button>
-        <button className='button-adicionar'>-</button>
+        <button className='button-adicionar' onClick={() => addCart(titulo, preco)}>+</button>
+        <button className='button-adicionar'onClick={()=> removeCart(titulo)}>-</button>
       </div>
 
       
@@ -41,11 +42,37 @@ function Produto({titulo, preco, path_image, nomeLoja, descricao}){
 
 export default function Home({nomeLoja, produtos, path_image}) {
 
+  const [ carrinho , setCarrinho ] = useState([])
+  
+  function addCart(nome, preco){
+    setCarrinho([
+      ...carrinho,
+      {
+        nome: nome,
+        preco: preco,
+      }
+    ]);
+  }
+
+  function removeCart(nome){
+    const resultado = carrinho.findIndex(function( produto ){
+      if(produto.nome === nome){
+        return true
+      }
+    })
+    if(resultado !== -1){
+      // remover o item do array carrinho
+      carrinho.splice(resultado,1)
+      const newCarrinho = [...carrinho]
+      setCarrinho(newCarrinho)
+    }
+  }
+
   return (
     <>
     <div className="navbar">
         <h1 className="business-menu">Business Menu</h1>
-        <p className="carrinho">Carrinho</p>
+        <p className="carrinho">Carrinho ({carrinho.length})</p>
       </div>
       <h2 className="nome-loja">{nomeLoja}</h2>
     <div className="grid-produtos background">
@@ -56,6 +83,8 @@ export default function Home({nomeLoja, produtos, path_image}) {
       nomeLoja={nomeLoja} 
       path_image={produto.path_image} 
       descricao={produto.descricao}
+      addCart={addCart}
+      removeCart={removeCart}
       />
       )}
     </div>

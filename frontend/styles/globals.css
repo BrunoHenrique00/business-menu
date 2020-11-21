@@ -218,7 +218,8 @@ a {
   bottom: 1%;
   right: 40%;
   background: #C4C4C4;
-  border: 2px solid #555555;
+  border: 5px solid #555555;
+  border-radius: 15px;
   transition: all 0.3s;
 }
 .ad-prod:hover{
@@ -230,7 +231,9 @@ a {
 /*****************************/
 
 /* registro e login */
-
+.pag-registro{
+  font-size: 42px;
+}
 .caixa{
   width: 100%;
   display: flex;
@@ -332,9 +335,9 @@ a {
 }
 
 
-.produtos-cadastrados h2 {
+/* .produtos-cadastrados h2 {
   
-}
+} */
 
 
 .admin-input{

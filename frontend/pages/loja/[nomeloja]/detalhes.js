@@ -17,20 +17,21 @@ export default function Home() {
       
       <div className="detalhe">
       
-      <img src={`http://localhost:3001/uploads/${path_image}`} href="" className="imagem-produto"></img>
+        <img src={`http://localhost:3001/uploads/${path_image}`} href="" className="imagem-produto"></img>
 
-      <div className="titulo-preço-detalhe">
+        <div className="titulo-preço-detalhe">
 
-        <h2 className="titulo">{titulo}</h2>
-        <h2 className="preço"> Preço: R$ {preco}</h2>
-        
-        <p className="detalhes-de-produto">
-          {descricao}
-        </p>
+          <h2 className="titulo">{titulo}</h2>
+          <h2 className="preço"> Preço: R$ {preco}</h2>
+          
+          <p className="detalhes-de-produto">
+            {descricao}
+          </p>
 
-      </div>
-      
-      <button className="ad-prod">ADICIONAR</button>
+        </div>
+
+        <button className="ad-prod">ADICIONAR</button>
+
       </div>
 
       </>
