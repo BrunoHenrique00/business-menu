@@ -391,3 +391,145 @@ a {
   
 }
 
+/* produtos no carrinho */
+
+.caixa-produtos{
+  display:flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  justify-content:center;
+  margin-top: 30px;
+
+}
+.background-gray{
+  background-color:#C4C4C4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width:50%;
+  margin: 10px;
+  padding-left:50px;
+  padding-right:50px;
+  border-radius: 10px;
+  
+}
+
+.total-preço{
+  text-align: center;
+  background: #C4C4C4;
+  border-radius: 10px;
+  margin-right: 750px;
+  margin-left: 750px;
+}
+.final-pedido{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+}
+.dados-comprador{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #c4c4c4;
+  height: 400px;
+  width: 80%;
+  margin: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+}
+.pedido{
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #c4c4c4;
+  margin-top: 30px;
+  margin-left: 500px;
+  margin-right: 500px;
+  width: 20%;
+  border-radius: 10px;
+}
+
+.dados-comprador textarea {
+  border-style: none;
+  background-color: #ffffff;
+  color: black;
+  width: 100%;
+  height:50px;
+  border-radius: 10px;
+  resize: vertical;
+}
+
+.button-pedido{
+  display: inline-block;
+  border-radius: 4px;
+  background-color:#48bb78;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  height: 60px;
+  font-size: 16px;
+  padding: 10px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.button-pedido:hover{
+  background-color: #4cd886;
+  color:#000000;
+}
+.button-remover-pedido{
+  display: inline-block;
+  border-radius: 4px;
+  border: none;
+  background-color: #FF7C7C;
+  color: #000000;
+  text-align: center;
+  height: 60px;
+  font-size: 16px;
+  padding: 10px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.button-remover-pedido:hover{
+  background-color: #000000;
+  color:#FFFFFF;
+}
+.box-pedido{
+  font-size: 26px;
+  color: #000000;
+  background-color: #F2F2F2;
+  border-radius: 10px;
+  width: 90%;
+}
+.dados-input{
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+}
+.agradecer{
+  padding-top: 50px;
+  text-align: center;
+  justify-content: space-between;
+  width: 90%;
+}
+.dados-input{
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+}
+.agradecer{
+  padding-top: 50px;
+  text-align: center;
+  justify-content: space-between;
+}

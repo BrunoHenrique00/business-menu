@@ -5,6 +5,8 @@ const { autenticador } = require('../controllers/produtosController')
 
 routes.post('/', autenticador, controller.get)
 
+routes.get('/:nomeLoja', controller.numeroLoja)
+
 routes.post('/register', controller.adicionaLoja)
 
 routes.delete('/:id', autenticador , controller.deletaLoja)

@@ -3,7 +3,8 @@ import { useRouter } from 'next/router'
 
 export default function Home() {
     const [userLogin, setUserLogin] = useState('')
-    const [userRegister, setUserRegister] = useState('')
+    const [userRegisterName, setUserRegisterName] = useState('')
+    const [userRegisterPhone, setUserRegisterPhone] = useState(0)
     const router = useRouter()
 
     async function handleLogin(){
@@ -31,7 +32,8 @@ export default function Home() {
 
     async function handleRegister(){
         const data = {
-            nome: userRegister
+            nome: userRegisterName,
+            numero_telefone: userRegisterPhone
         }
         const response = await fetch('http://localhost:3001/lojas/register',{
             method: 'POST',
@@ -60,17 +62,18 @@ export default function Home() {
         <div className="caixa">
             <div className="caixa-login">
                 <h2> Nome da sua empresa:</h2>
-                <input placeholder='Digite sua empresa' className="input" onChange={ (e) => setUserLogin(e.target.value)}/>
+                <input placeholder='Digite o nome da sua empresa' className="input" onChange={ (e) => setUserLogin(e.target.value)}/>
 
                 <button className='button button-login' onClick={handleLogin}>Login</button>
             </div>
 
             <div className="caixa-registro">
                 <h2>Nome da Empresa:</h2>
-                <input placeholder='Digite o nome da empresa' className="input" onChange={ (e) => setUserRegister(e.target.value)}/>
+                <input placeholder='Digite o nome da empresa' className="input" onChange={ (e) => setUserRegisterName(e.target.value)}/>
 
                 <h2>Numero de Telefone:</h2>
-                <input placeholder='Digite o número de telefone' className="input"/>
+                <p>EX: +55 (61) 98332-2455 precisa ser digitado assim -> 5561983322455</p>
+                <input placeholder='Digite o número de telefone' onChange={(e) => setUserRegisterPhone(e.target.value)} className="input"/>
 
                 <button className='button button-registrar' onClick={handleRegister}>Registrar</button>
             </div>

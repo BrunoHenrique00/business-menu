@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from 'react'
+import { useCarrinho } from '../../../context/Carrinho'
 
 function Produto({titulo, preco, path_image, nomeLoja, descricao, addCart , removeCart}){
   return(
@@ -42,7 +42,7 @@ function Produto({titulo, preco, path_image, nomeLoja, descricao, addCart , remo
 
 export default function Home({nomeLoja, produtos, path_image}) {
 
-  const [ carrinho , setCarrinho ] = useState([])
+  const { carrinho , setCarrinho }  = useCarrinho()
   
   function addCart(nome, preco){
     setCarrinho([
@@ -72,7 +72,15 @@ export default function Home({nomeLoja, produtos, path_image}) {
     <>
     <div className="navbar">
         <h1 className="business-menu">Business Menu</h1>
-        <p className="carrinho">Carrinho ({carrinho.length})</p>
+        <Link
+        href={
+          { 
+          pathname: `/loja/${nomeLoja}/carrinho` 
+          }
+        }
+        >
+          <p className="carrinho">Carrinho ({carrinho.length})</p>
+        </Link>
       </div>
       <h2 className="nome-loja">{nomeLoja}</h2>
     <div className="grid-produtos background">
