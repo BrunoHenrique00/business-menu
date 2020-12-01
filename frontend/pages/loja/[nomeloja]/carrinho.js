@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useCarrinho } from '../../../context/Carrinho'
 import React , { useState } from "react" ;
+import { useRouter } from 'next/router'
 
 export default function Home() {
 
@@ -9,23 +10,28 @@ export default function Home() {
     const [endereco, setEndereco] = useState('')
     const [observacoes, setObservacoes] = useState('')
 
+    const router = useRouter()
+    const nomeLoja = router.query.nomeloja
 
     function calcularTotal(carrinho){
         const resultado = carrinho.reduce(function (accumulator, currentValue){
             return accumulator + currentValue.preco
         },0)
 
-        return resultado
+        return resultado.toFixed(2)
     }
 
-    function enviarPedido(numero, carrinho){
+    async function enviarPedido(numero, carrinho){
 
-        let stringPedido = `Olá gostaria de pedir
+        const data = await fetch(`http://localhost:3001/lojas/${nomeLoja}`)
+        const { numero: numeroLoja } = await data.json()
+
+        let stringPedido = `*Olá, gostaria de fazer um pedido da sua loja ${nomeLoja}. Os itens escolhidos são*:\n
         ${carrinho.map(produto => `
-        Produto:${produto.nome}
-        Preco:${produto.preco}
-        ===========================`).join('')}
-        Total: ${calcularTotal(carrinho)}\n
+        *Produto*: ${produto.nome}
+        *Preco*: ${produto.preco}
+        ==============`).join('')}\n
+        _Total_: *${calcularTotal(carrinho)}*\n
         Nome: ${nome}\n
         Endereço: ${endereco}\n 
         Observações: ${observacoes}\n
@@ -33,16 +39,22 @@ export default function Home() {
 
         stringPedido = window.encodeURI(stringPedido)
 
-        window.open(`https://api.whatsapp.com/send?phone=5561983322455&text=${stringPedido}`)
+        window.open(`https://api.whatsapp.com/send?phone=${numeroLoja}&text=${stringPedido}`)
     }
 
       return (
         <>
             <div className="navbar">
                 <h1 className="business-menu">Business Menu</h1>
-                <Link href='/loja/Blend'> 
-                    <h2 className="carrinho">Voltar</h2>
-                </Link>
+
+                <div className="carrinho">
+                    <Link href={`/loja/${nomeLoja}`}> 
+                        <a className="carrinho-voltar">Voltar</a>
+                    </Link>
+                    <Link href={`/loja/${nomeLoja}`}>
+                        <img src='/back-button.svg' width="60" height="60" />
+                    </Link>
+                </div>
             </div>
 
 
@@ -64,7 +76,7 @@ export default function Home() {
             
 
             <div className="total">
-                <h2 className="total-preço">Total: R$ {calcularTotal(carrinho).toFixed(2)}</h2> 
+                <h2 className="total-preço">Total: R$ {calcularTotal(carrinho)}</h2> 
             </div>
             
             <div className="final-pedido">
@@ -84,12 +96,11 @@ export default function Home() {
                 </div> 
                 <div className="pedido">
                     <button className="button-pedido" onClick={() => enviarPedido(21212, carrinho)}> <b>Enviar Pedido </b></button>
-                    <button className="button-remover-pedido"> <b>Remover todos os produtos</b></button>
                 </div>
             </div>
             <div className="agradecer">
-            <footer className="fim-loja">Obrigado por comprar conosco</footer>
-            <footer className="agradecimentos"> Feito por HS Softwares com carinho para os clientes</footer>
+                <footer> Obrigado por comprar conosco </footer>
+                <footer> Feito por HS Softwares com carinho para os clientes</footer>
             </div>
             
         </>

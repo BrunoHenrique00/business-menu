@@ -40,7 +40,7 @@ function Produto({titulo, preco, path_image, nomeLoja, descricao, addCart , remo
   )
 }
 
-export default function Home({nomeLoja, produtos, path_image}) {
+export default function Home({nomeLoja, produtos, path_image, error}) {
 
   const { carrinho , setCarrinho }  = useCarrinho()
   
@@ -79,23 +79,36 @@ export default function Home({nomeLoja, produtos, path_image}) {
           }
         }
         >
-          <p className="carrinho">Carrinho ({carrinho.length})</p>
+          <a className="carrinho">
+            <img src='/shopping-cart.svg' width="60" height="60" />
+            Carrinho ({carrinho.length})
+          </a>
         </Link>
       </div>
-      <h2 className="nome-loja">{nomeLoja}</h2>
-    <div className="grid-produtos background">
-      {produtos.map( produto => <Produto 
-      titulo={produto.nome} 
-      key={produto.id} 
-      preco={produto.preco} 
-      nomeLoja={nomeLoja} 
-      path_image={produto.path_image} 
-      descricao={produto.descricao}
-      addCart={addCart}
-      removeCart={removeCart}
-      />
-      )}
-    </div>
+    {
+      !error && 
+      <>
+        <h2 className="nome-loja">{nomeLoja}</h2>
+
+        <div className="grid-produtos background">
+          {produtos.map( produto => <Produto 
+          titulo={produto.nome} 
+          key={produto.id} 
+          preco={produto.preco} 
+          nomeLoja={nomeLoja} 
+          path_image={produto.path_image} 
+          descricao={produto.descricao}
+          addCart={addCart}
+          removeCart={removeCart}
+          />
+          )}
+        </div>
+      </>
+    }
+
+    {
+      error && <p className='erro-loja'>Não achamos esta loja!</p>
+    }
     </>
   )
 }
@@ -105,12 +118,22 @@ export async function getServerSideProps({params}) {
   const nomeLoja = params.nomeloja
 
   const data = await fetch(`http://localhost:3001/produtos/${nomeLoja}`) 
-  const { produtos } = await data.json()
+  const json  = await data.json()
 
-  return {
-    props: {
-      nomeLoja: params.nomeloja,
-      produtos: produtos
-    }, 
+  if(json.produtos){
+    return {
+      props: {
+        nomeLoja: params.nomeloja,
+        produtos: json.produtos
+      }, 
+    }
+  }else{
+    return {
+      props: {
+        error: json.error
+      }, 
+    }
   }
+
+
 }

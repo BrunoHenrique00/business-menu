@@ -1,5 +1,6 @@
 import { useState, useEffect} from 'react'
 import { useRouter } from 'next/router';
+import Link from 'next/link'
 
 export default function Admin() {
 
@@ -59,6 +60,7 @@ export default function Admin() {
         })
         const json = await response.json()
         console.log(json)
+        window.alert('Produto removido com sucesso!')
     }
     // Router
     const router = useRouter()
@@ -78,7 +80,15 @@ export default function Admin() {
       <>
         <div className="navbar">
             <h1 className="business-menu">Business Menu</h1>
-            <p className="carrinho">{`Olá ${usuario} seja bem vindo!`}</p>
+            <p className="carrinho">{`Olá ${usuario}, seja bem vindo!`}</p>
+            
+            <div className='carrinho'>
+                <Link href={`/loja/${usuario}`}>
+                    <button className="button">Ver Minha Loja</button>
+                </Link>
+                <img src='/shop.svg' width="60" height="60" />
+            </div>
+            
         </div>
         <div className='caixa'>
             <div className='caixa-login'>

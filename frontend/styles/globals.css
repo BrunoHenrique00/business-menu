@@ -50,9 +50,16 @@ a {
 
 .carrinho {
   font-size: 40px;
-  line-height: 59px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  justify-items: center;
   color: #000000;
   font-weight: bold;
+}
+
+.carrinho img {
+  margin-right: 20px;
 }
 
 .navbar {
@@ -67,6 +74,8 @@ a {
 
 .nome-loja {
   text-align: center;
+  font-size: 50px;
+  font-weight: 600;
 }
 
 /* CSS DA CAIXA DO PRODUTO */
@@ -121,12 +130,12 @@ a {
   background-color: #D28A74;
   border-radius: 60px;
   
-  
+  border: none; 
   text-align: center;
   height: 60px;
   font-size: 2.6rem;
   color: #000000;
-  padding: 10px;
+
   width: 60px;
   transition: all 0.5s;
   cursor: pointer;
@@ -221,6 +230,7 @@ a {
   border: 5px solid #555555;
   border-radius: 15px;
   transition: all 0.3s;
+  border:none;
 }
 .ad-prod:hover{
   background-color: #555555;
@@ -238,6 +248,7 @@ a {
   width: 100%;
   display: flex;
   padding-top: 150px;  
+  
 }
 
 .caixa-login{
@@ -261,8 +272,10 @@ a {
   width: 50%;
   background-color:#BCB8B1;
   border-radius: 10px;
-  margin:30px;
+  margin:20px;
   font-size:18px;
+  
+
 
 }
 .input{
@@ -310,6 +323,7 @@ a {
   justify-content: center;
   align-items: center;
 
+
 }
 .cadastrados-form{
   width: 100%;
@@ -318,11 +332,13 @@ a {
   flex-direction: column;
   background: #C4C4C4;
   border-radius: 28px;
+  margin:auto;
+  padding:10px;
 }
 
 .produtos-cadastrados {
   display: flex;
-  margin: auto;
+  margin: 8px ;
   width: 80%;
   justify-content: space-between;
   align-items: center;
@@ -330,7 +346,10 @@ a {
   font-size:10px;
   background: #FFFFFF;
   border-radius: 10px;
-  padding-left:15px;
+  padding-left:10px;
+  margin-left:70px;
+  
+  
   
 }
 
@@ -349,6 +368,7 @@ a {
   border-radius: 10px;
   resize: vertical;
 } 
+
 .button-cadastro{
   display: inline-block;
   border-radius: 4px;
@@ -364,9 +384,11 @@ a {
   cursor: pointer;
   margin: 5px;
 }
+
 .button-cadastro:hover{
   background:  #353434;
 }
+
 .remove-prod{
 
   width: 120px;
@@ -385,6 +407,7 @@ a {
   margin-bottom: 10px;
   
 }
+
 .remove-prod:hover{
   background-color: black;
   color:white;
@@ -401,8 +424,8 @@ a {
   border-radius: 10px;
   justify-content:center;
   margin-top: 30px;
-
 }
+
 .background-gray{
   background-color:#C4C4C4;
   display: flex;
@@ -423,12 +446,22 @@ a {
   margin-right: 750px;
   margin-left: 750px;
 }
+
+.box-pedido{
+  font-size: 26px;
+  color: #000000;
+  background-color: #F2F2F2;
+  border-radius: 10px;
+  width: 90%;
+}
+
 .final-pedido{
   display:flex;
   flex-direction: column;
   align-items: center;
   justify-content:center;
 }
+
 .dados-comprador{
   display:flex;
   flex-direction: column;
@@ -442,18 +475,6 @@ a {
   padding-bottom: 20px;
   border-radius: 10px;
 }
-.pedido{
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #c4c4c4;
-  margin-top: 30px;
-  margin-left: 500px;
-  margin-right: 500px;
-  width: 20%;
-  border-radius: 10px;
-}
 
 .dados-comprador textarea {
   border-style: none;
@@ -464,6 +485,19 @@ a {
   border-radius: 10px;
   resize: vertical;
 }
+
+.pedido{
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #c4c4c4;
+  margin-top: 30px;
+  margin-left: 400px;
+  margin-right: 400px;
+  border-radius: 10px;
+}
+
 
 .button-pedido{
   display: inline-block;
@@ -480,56 +514,54 @@ a {
   cursor: pointer;
   margin: 5px;
 }
+
 .button-pedido:hover{
   background-color: #4cd886;
   color:#000000;
 }
-.button-remover-pedido{
-  display: inline-block;
-  border-radius: 4px;
+
+
+.dados-span, .endereco{
+  padding-left: 10px;
+}
+
+.dados-input{
+  width: 100%;
+  height: 50px;
   border: none;
-  background-color: #FF7C7C;
-  color: #000000;
+  border-radius: 10px;
+}
+
+.dados-obs {
+  padding-top: 18px;
+}
+
+.dados-input, .dados-obs {
+  padding-left: 10px;
+}
+
+.agradecer{
+  padding-top: 50px;
+  padding-bottom: 10px;
   text-align: center;
-  height: 60px;
-  font-size: 16px;
-  padding: 10px;
-  width: 150px;
+  justify-content: space-between;
+}
+
+.carrinho-voltar{
+  font-size: 48px;
+  color: #000000;
+  margin-right: 20px;
+  font-weight: bold;
   transition: all 0.5s;
   cursor: pointer;
-  margin: 5px;
 }
-.button-remover-pedido:hover{
-  background-color: #000000;
-  color:#FFFFFF;
+
+.carrinho-voltar:hover{
+  color: #D28A74
 }
-.box-pedido{
-  font-size: 26px;
-  color: #000000;
-  background-color: #F2F2F2;
-  border-radius: 10px;
-  width: 90%;
-}
-.dados-input{
-  width: 100%;
-  height: 50px;
-  border: none;
-  border-radius: 10px;
-}
-.agradecer{
-  padding-top: 50px;
+
+.erro-loja{
+  font-size: xx-large;
   text-align: center;
-  justify-content: space-between;
-  width: 90%;
 }
-.dados-input{
-  width: 100%;
-  height: 50px;
-  border: none;
-  border-radius: 10px;
-}
-.agradecer{
-  padding-top: 50px;
-  text-align: center;
-  justify-content: space-between;
-}
+    
