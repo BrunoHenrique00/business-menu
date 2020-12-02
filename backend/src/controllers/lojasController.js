@@ -22,9 +22,10 @@ module.exports.get = async (req, res, next) => {
 
 module.exports.adicionaLoja = async (req,res,next) => {
     try{
-        const { nome } = req.body
-        await knex('lojas').insert({ nome })
-        res.json({ message:'Loja cadastrada com sucesso ' + nome })
+        const { nome , numero_telefone  } = req.body
+
+        await knex('lojas').insert({ nome , numero_telefone })
+        res.json({ message:'Loja cadastrada com sucesso ' + nome + ' com numero ' + numero_telefone })
     }
     catch (error) {
         next(error)
@@ -68,6 +69,20 @@ module.exports.login = async (req,res,next) => {
                 message: "Informacoes erradas"
             })
         }
+     }
+     catch (error) {
+         next(error)
+     }
+}
+
+module.exports.numeroLoja = async (req,res,next) => {
+    try{
+        const  nome  = req.params.nomeLoja
+        const numeroLoja = await knex('lojas').where('nome', nome)
+
+        res.json({
+            numero: numeroLoja[0].numero_telefone
+        })
      }
      catch (error) {
          next(error)
