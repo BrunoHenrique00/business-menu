@@ -439,15 +439,22 @@ a {
   border-radius: 10px;
   
 }
-
-.total-preço{
-  text-align: center;
+.total{
+  display: flex;
+  justify-content: center;
   background: #C4C4C4;
   border-radius: 10px;
-  margin-right: 750px;
-  margin-left: 750px;
+  width: 10%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top:20px;
+  margin-bottom: 20px;
 }
-
+.total-preço{
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 .box-pedido{
   font-size: 26px;
   color: #000000;
@@ -559,6 +566,17 @@ a {
 
 .carrinho-voltar:hover{
   color: #D28A74
+}
+.carrinho-voltar-img{
+  transition: all 0.5s;
+  cursor: pointer;
+  border-radius: 30px;
+}
+.carrinho-voltar-img:hover{
+ background-color: #D28A74;
+}
+.whats-logo{
+  background:transparent;
 }
 
 .erro-loja{
