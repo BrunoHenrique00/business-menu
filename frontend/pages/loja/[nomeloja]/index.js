@@ -88,8 +88,10 @@ export default function Home({nomeLoja, produtos, path_image, error}) {
     {
       !error && 
       <>
-        <h2 className="nome-loja">{nomeLoja}</h2>
-
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <h2 className="nome-loja">{nomeLoja}</h2>
+        </div>
+        
         <div className="grid-produtos background">
           {produtos.map( produto => <Produto 
           titulo={produto.nome} 

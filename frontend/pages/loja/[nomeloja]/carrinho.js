@@ -21,7 +21,7 @@ export default function Home() {
         return resultado.toFixed(2)
     }
 
-    async function enviarPedido(numero, carrinho){
+    async function enviarPedido(carrinho){
 
         const data = await fetch(`http://localhost:3001/lojas/${nomeLoja}`)
         const { numero: numeroLoja } = await data.json()
@@ -95,7 +95,7 @@ export default function Home() {
                         </div>
                 </div> 
                 <div className="pedido">
-                    <button className="button-pedido" onClick={() => enviarPedido(21212, carrinho)}> <b>Enviar Pedido </b></button>
+                    <button className="button-pedido" onClick={() => enviarPedido(carrinho)}> <b>Enviar Pedido </b></button>
                 </div>
             </div>
             <div className="agradecer">
@@ -105,5 +105,6 @@ export default function Home() {
             
         </>
         
-      )
+        )
+        
 }

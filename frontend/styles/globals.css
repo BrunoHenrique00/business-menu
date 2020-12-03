@@ -76,6 +76,9 @@ a {
   text-align: center;
   font-size: 50px;
   font-weight: 600;
+  background-color: #F4F3EE;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 /* CSS DA CAIXA DO PRODUTO */
@@ -182,7 +185,7 @@ a {
   display: flex;
   margin: auto;
   width: 1221px;
-  height: 676px;
+  height: 450px;
   left: 124px;
   top: 259px;
   background: #F2F2F2;
@@ -209,15 +212,28 @@ a {
   max-width: 50%;
   height: 421px;
   padding-left: 33px;
-  padding-top: 60px;
+  padding-top: 25px;
 }
+
+.titulo, .preço {
+  background: #BCB8B1;
+  border-radius: 10px;
+  padding: 5px;
+  margin-right: 55px;
+  padding-left: 10px;
+}
+
 .detalhes-de-produto {
+  background: #c4c4c4;
   position: absolute;
-  height: 280px;
+  height: 200px;
   width: 520px;
   text-align: justify;
   Size: 24px;
   line-height: 35,57px;
+  padding: 20px;
+  border-radius: 10px;
+  font-weight: bold;
 }
 
 .ad-prod {
@@ -331,7 +347,7 @@ a {
   display: flex;
   flex-direction: column;
   background: #C4C4C4;
-  border-radius: 28px;
+  border-radius: 10px;
   margin:auto;
   padding:10px;
 }

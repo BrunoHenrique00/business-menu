@@ -109,6 +109,7 @@ export default function Admin() {
                 </div>
             </div>
             <div className='caixa-registro'>
+                <h2>Meus Produtos</h2>
                 <div className='cadastrados-form'>
                     {produtos.map( produto => (
                         <div className='produtos-cadastrados'>
