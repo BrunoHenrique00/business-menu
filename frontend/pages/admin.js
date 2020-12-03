@@ -13,18 +13,19 @@ export default function Admin() {
         const lojaId = localStorage.getItem('id_usuario')
 
         if(!lojaId){
-            router.push('/')
             window.alert('Ops, você não está autenticado!')
+            router.push('/')
+        }else{
+            const data = await fetch(`http://localhost:3001/lojas/`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({id: lojaId})
+                }) 
+            const json = await data.json()
+            setProdutos(json.produtos)
         }
-        const data = await fetch(`http://localhost:3001/lojas/`,{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({id: lojaId})
-        }) 
-        const json = await data.json()
-        setProdutos(json.produtos)
     }
 
     async function sendProduct(){
