@@ -52,7 +52,7 @@ export default function Home() {
                         <a className="carrinho-voltar">Voltar</a>
                     </Link>
                     <Link href={`/loja/${nomeLoja}`}>
-                        <img src='/back-button.svg' width="60" height="60" />
+                        <img className="carrinho-voltar-img" src='/back-button.svg' width="50" height="50" />
                     </Link>
                 </div>
             </div>
@@ -95,7 +95,10 @@ export default function Home() {
                         </div>
                 </div> 
                 <div className="pedido">
-                    <button className="button-pedido" onClick={() => enviarPedido(21212, carrinho)}> <b>Enviar Pedido </b></button>
+                    <button className="button-pedido" onClick={() => enviarPedido(21212, carrinho)}>
+                         <b>Enviar Pedido </b>
+                         <img className="whats-logo" src='/whats.svg' width="30" height="30" />
+                    </button>
                 </div>
             </div>
             <div className="agradecer">
