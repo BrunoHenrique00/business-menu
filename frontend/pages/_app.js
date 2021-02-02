@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import '../styles/admin.css'
 import CarrinhoProvider from '../context/Carrinho'
 
 function MyApp({ Component, pageProps }) {

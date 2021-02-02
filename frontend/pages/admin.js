@@ -1,6 +1,13 @@
 import { useState, useEffect} from 'react'
 import { useRouter } from 'next/router';
-import Link from 'next/link'
+//Components
+import AdminProducts from '../components/AdminProducts'
+import RegisterProduct from '../components/RegisterProduct'
+import Myshop from '../components/MyShop'
+
+import Home from '@material-ui/icons/Home'
+import LocalMallIcon from '@material-ui/icons/LocalMall';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export default function Admin() {
 
@@ -28,100 +35,56 @@ export default function Admin() {
         }
     }
 
-    async function sendProduct(){
-        const precoNumber = parseFloat(preco)
-        const formData = new FormData()
-
-        formData.append("img", img[0])
-        formData.append('nome', name)
-        formData.append('descricao', descricao)
-        formData.append('preco', precoNumber)
-        formData.append('loja_id', localStorage.getItem('id_usuario'))
-        formData.append('id', localStorage.getItem('id_usuario'))
-
-        const response = await fetch('http://localhost:3001/produtos/',{
-            method: 'POST',
-            body: formData
-        })
-        const json = await response.json()
-        if(json.error){
-            window.alert('Algo deu errado com a criação do seu produto :( ')
-        }else{
-            window.alert('Seu produto foi criado com sucesso!')
-        }
-    }
-
-    async function removeProduto(idProduto){
-        const response = await fetch(`http://localhost:3001/produtos/${idProduto}`,{
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({id: localStorage.getItem('id_usuario')})
-        })
-        const json = await response.json()
-        console.log(json)
-        window.alert('Produto removido com sucesso!')
-    }
     // Router
     const router = useRouter()
-    // Form states
-    const [ name, setName] = useState('')
-    const [ descricao, setDescricao] = useState('')
-    const [ preco, setPreco] = useState(0)
-    const [ img, setImg] = useState(null)
-
     // Product states
     const [ produtos, setProdutos] = useState([])
-
     const [usuario, setUsuario] = useState('')
-
+    // Navigation States
+    const [isAdminProducts, setIsAdminProducts] = useState(true)
+    const [isAdminInShop, SetIsAdminInShop] = useState(false)
 
     return (
       <>
-        <div className="navbar">
-            <h1 className="business-menu">Business Menu</h1>
-            <p className="carrinho">{`Olá ${usuario}, seja bem vindo!`}</p>
-            
-            <div className='carrinho'>
-                <Link href={`/loja/${usuario}`}>
-                    <button className="button">Ver Minha Loja</button>
-                </Link>
-                <img src='/shop.svg' width="60" height="60" />
-            </div>
-            
-        </div>
-        <div className='caixa'>
-            <div className='caixa-login'>
-                <div className='admin-form'>
-                    <label> <b>Nome do produto</b> </label>
-                    <input className='admin-input'onChange={ (e) => setName(e.target.value)}/>
+        <div className="container-admin">
+            <div className="navbar-admin">
+                <img src="/logo.svg" />
 
-                    <label> <b>Descrição</b> </label>
-                    <textarea className='admin-input' onChange={ (e) => setDescricao(e.target.value)}/>
-
-                    <label> <b> Preço </b> </label>
-                    <input className='admin-input' type='number'onChange={ (e) => setPreco(e.target.value)}/>
-
-                    <label> <b> A imagem do seu produto </b> </label>
-                    <input  type='file'onChange={ (e) => setImg(e.target.files)}/>
-                    <button onClick={sendProduct} className='button-cadastro'>Cadastrar produto</button>
+                <div className="navbar-menu">
+                    <div
+                    className={isAdminInShop ? "options-admin-selected" : "options-admin"}
+                    onClick={() => isAdminInShop ? null : SetIsAdminInShop(!isAdminInShop)}
+                    >
+                        <Home style={{ fontSize: 50 }}/>
+                        <h2>Minha Loja</h2>
+                    </div>
+                    <div
+                    className={isAdminInShop ? "options-admin" : "options-admin-selected"}
+                    onClick={() => isAdminInShop ? SetIsAdminInShop(!isAdminInShop) : null}
+                    >
+                        <LocalMallIcon style={{ fontSize: 50 }}/>
+                        <h2>Produtos</h2>
+                    </div>
+                    <div className="options-admin">
+                        <ExitToAppIcon style={{ fontSize: 50 }}/>
+                        <h2>Sair</h2>
+                    </div>
                 </div>
             </div>
-            <div className='caixa-registro'>
-                <h2>Meus Produtos</h2>
-                <div className='cadastrados-form'>
-                    {produtos.map( produto => (
-                        <div className='produtos-cadastrados'>
-                            <h2>Produto: {produto.nome}</h2>
-                            <h2>Preço: R$ {produto.preco.toFixed(2)}</h2>
-                            <button className='remove-prod' onClick={() => removeProduto(produto.id)}><b>Remover</b></button>
-                        </div>
-                    ))}
+
+
+            <div className="admin-area">
+                <div className="admin-top">
+                    <h1>Cardapiú</h1>
+                    <p>Olá <span className="sublime">{`${usuario}`}</span>, seja bem vindo!</p>
                 </div>
+
+                {isAdminProducts && !isAdminInShop && <AdminProducts produtos={produtos} setIsAdminProducts={setIsAdminProducts}/>}
+                {!isAdminProducts && !isAdminInShop &&<RegisterProduct setIsAdminProducts={setIsAdminProducts}/>}
+                {isAdminInShop && <Myshop usuario={usuario} />}
+
             </div>
         </div>
-        
       </>
     )
 }

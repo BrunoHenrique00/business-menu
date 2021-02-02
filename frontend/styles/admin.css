@@ -1,0 +1,328 @@
+.navbar-admin{
+    background-color: #5700B8;
+    text-align: center;
+    color: #F4F3EE;
+}
+
+.navbar-menu{
+    margin-top: 50px;
+}
+
+.navbar-admin img {
+    width: 100px;
+    height: 100px;
+}
+.container-admin{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+
+.admin-area{
+    height: 100%;
+}
+
+.options-admin , .options-admin-selected{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 30px;
+}
+
+.options-admin img{
+    width: 70px;
+    height: 70px;
+}
+
+.options-admin h2{
+    margin-left: 15px;
+    width: 100%;
+    text-align: left;
+}
+
+.options-admin-selected{
+    background-color: #F4F3EE;
+    color: #404040;
+}
+
+.options-admin-selected h2{
+    margin-left: 15px;
+    width: 100%;
+    text-align: left;
+}
+
+.admin-top{
+    color:  #404040;
+    background-color: #F4F3EE;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 20px;
+}
+
+.admin-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.busca-admin{
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 85% 15%;
+    border: 1px solid #787878;
+    border-radius: 22px;
+    width: 80%;
+    margin-top: 30px;
+}
+
+.busca-admin svg{
+    font-size: 30px !important;
+}
+
+.busca-admin input{
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    justify-self: center;
+    border-style: none;
+    background-color: rgba(0, 0, 0, 0.0);   
+}
+
+.busca-admin input:focus{
+    outline: none; 
+}
+
+.produtos-cadastrados {
+    display: flex;
+    margin: 15px auto;
+    width: 95%;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    font-size:10px;
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.produtos-cadastrados img {
+    border-radius: 10px;
+}
+
+.produtos-cadastrados h1{
+    max-width: 35%;
+}
+
+.produtos-cadastrados h2 {
+    color: #6B6B6B;
+}
+
+.produtos{
+    width: 90%;
+    margin: 5px 0px;
+    border: 1px solid #787878;
+    border-radius: 22px;
+}
+
+.produtos img{
+    width: 100px;
+    height: 100px;
+}
+
+.produtos hr {
+    margin: auto;
+    width: 90%;
+    height: 2px;
+    background: #5700B8;
+    border-radius: 10px;
+    border-style: none;
+}
+.produtos hr:last-child {
+    display: none;
+}
+
+.remove-prod{
+    width: 10%;
+    height: 40px;
+    background: #FF5252;
+
+    color: #000000;
+    cursor: pointer;
+  
+    border-radius: 5px;
+    border-style: none;
+    transition: all 0.3s;
+}
+
+.btn-alterar {
+    background-color: #007FFF;
+    color: white;
+    width: 20%;
+    height: 40px;
+    border-radius: 5px;
+    border-style: none;
+}
+
+.btn-registrar-produto{
+    margin: 25px;
+    width: 20%;
+    height: 40px;
+    background: #5700B8;
+    border-style: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 300;
+}
+
+.admin-input{
+    border-style: none;
+    background-color: white;
+    color: black;
+    width: 100%;
+    height:50px;
+    margin: 10px;
+  } 
+  
+  .button-cadastro{
+    display: inline-block;
+    border-radius: 10px;
+    background-color: #007FFF;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    height: 60px;
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    margin: auto;
+  }
+
+  .admin-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    height: 80%;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius:20px;
+    border: 1px solid #787878;
+    font-size: 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sublime {
+    color: #F4F3EE;
+    background-color: #5700B8;
+}
+
+/* Admin-my-shop */
+.admin-my-shop{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+    margin: auto;
+}
+
+.admin-my-shop h2{
+    color: #6B6B6B;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.my-shop-form{
+    border: 1px solid #787878;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.my-shop-form div, .my-shop-form h2{
+    margin: 5px 0px;
+}
+
+.btn-ver-loja, .btn-ver-loja button{
+    background-color: #5700B8;
+    color: #F4F3EE;
+    border-radius: 10px;
+    border-style: none;
+}
+
+.btn-ver-loja{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    justify-content: center;
+    width: 40%;
+    margin: 20px 0px;
+}
+
+@media (max-width: 500px){
+    .container-admin{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .navbar-menu{
+        margin: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .navbar-admin img{
+        display: none;
+    }
+
+    .admin-top{
+        padding: 15px 20px;
+    }
+
+    .options-admin, .options-admin-selected{
+        width: 33.33%;
+    }
+
+    .options-admin h2, .options-admin-selected h2{
+        display: none;
+    }
+
+    .produtos-cadastrados img{
+        height: 50px;
+        width: 50px;
+    }
+
+    .produtos-cadastrados h1, .produtos-cadastrados h2{
+        font-size: 12px;
+    }
+
+    .admin-top h1{
+        display: none;
+    }
+
+    .admin-top{
+        background-color: #5700B8;
+        color: #F4F3EE;
+    }
+
+    .sublime{
+        color: #5700B8;
+        background-color: #F4F3EE;
+    }
+
+    .btn-registrar-produto{
+        width: 50%;
+        font-size: 15px;
+    }
+
+    .btn-alterar{
+        font-size: 10px;
+        width: 15%;
+    }
+}
