@@ -3,13 +3,12 @@ import { useCarrinho } from '../../../context/Carrinho'
 
 function Produto({titulo, preco, path_image, nomeLoja, descricao, addCart , removeCart}){
   return(
-    <div>
       <div className="product-container flex">
         <img className="product-img" src={`http://localhost:3001/uploads/${path_image}`} />
         <div className="product-info">
           <h2>{titulo}</h2>
-          <p>Preço R$: {preco.toFixed(2)}</p>
-          <button className='button'>
+          <p>{preco.toFixed(2)}</p>
+          {/* <button className='button'>
             <Link 
             href={
             { 
@@ -26,17 +25,13 @@ function Produto({titulo, preco, path_image, nomeLoja, descricao, addCart , remo
                 Veja mais
               </span>
             </Link>
-          </button>
-        </div>
-      </div>
-
-      <div className='button-flex'>
+          </button> */}
+      {/* <div className='button-flex'>
         <button className='button-adicionar' onClick={() => addCart(titulo, preco)}>+</button>
         <button className='button-adicionar'onClick={()=> removeCart(titulo)}>-</button>
+      </div> */}
+        </div>
       </div>
-
-      
-    </div>
   )
 }
 
@@ -70,8 +65,8 @@ export default function Home({nomeLoja, produtos, path_image, error}) {
 
   return (
     <>
-    <div className="navbar">
-        <h1 className="business-menu">Business Menu</h1>
+    <div className="navbar-loja">
+        <h2 className="nome-loja">{nomeLoja}</h2>
         <Link
         href={
           { 
@@ -80,19 +75,15 @@ export default function Home({nomeLoja, produtos, path_image, error}) {
         }
         >
           <a className="carrinho">
+            {carrinho.length}
             <img src='/shopping-cart.svg' width="60" height="60" />
-            Carrinho ({carrinho.length})
           </a>
         </Link>
-      </div>
+    </div>
     {
       !error && 
-      <>
-        <div style={{display: 'flex', justifyContent: 'center'}}>
-          <h2 className="nome-loja">{nomeLoja}</h2>
-        </div>
-        
-        <div className="grid-produtos background">
+      <> 
+        <div className="grid-produtos">
           {produtos.map( produto => <Produto 
           titulo={produto.nome} 
           key={produto.id} 
