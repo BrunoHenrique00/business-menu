@@ -49,7 +49,7 @@ export default function Login(){
                 <input placeholder='Digite o nome da sua empresa' className="input" onChange={ (e) => setUserLogin(e.target.value)}/>
 
                 <h2>Senha:</h2>
-                <input placeholder='Digite sua senha' className="input"/>
+                <input placeholder='Digite sua senha' type="password" className="input"/>
 
                 <button className='button-login' onClick={handleLogin}>Login</button>
 

@@ -49,7 +49,7 @@ export default function Register(){
                     <input placeholder='Seu email' className="input"/>
 
                     <h2>Senha:</h2>
-                    <input placeholder='Senha' className="input"/>
+                    <input placeholder='Senha' type="password" className="input"/>
 
                     <h2>Numero de Telefone:</h2>
                     <input placeholder='Digite o número de telefone' onChange={(e) => setUserRegisterPhone(e.target.value)} className="input"/>
