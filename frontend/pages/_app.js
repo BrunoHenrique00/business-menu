@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import '../styles/admin.css'
 import '../styles/loja.css'
+import '../styles/login-registro.css'
 import CarrinhoProvider from '../context/Carrinho'
 
 function MyApp({ Component, pageProps }) {

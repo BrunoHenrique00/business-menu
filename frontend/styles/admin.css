@@ -186,8 +186,10 @@
     margin: 10px;
   } 
   
-  .button-cadastro{
-    display: inline-block;
+.button-cadastro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 10px;
     background-color: #007FFF;
     border: none;
@@ -198,7 +200,11 @@
     font-size: 16px;
     padding: 10px;
     margin: auto;
-  }
+}
+
+.button-cadastro p{
+    margin: 0px 6px;
+}
 
   .admin-form {
     display: flex;
@@ -242,10 +248,24 @@
     border: 1px solid #787878;
     border-radius: 10px;
     padding: 15px;
+    height: 60%;
 }
 
 .my-shop-form div, .my-shop-form h2{
     margin: 5px 0px;
+}
+
+.input-color{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px !important;
+}
+
+.input-color input{
+    width: 50%;
+    height: 100%;
 }
 
 .btn-ver-loja, .btn-ver-loja button{

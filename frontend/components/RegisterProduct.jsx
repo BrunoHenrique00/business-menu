@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import TextField from '@material-ui/core/TextField'
+import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
+import BorderColorRoundedIcon from '@material-ui/icons/BorderColorRounded';
 
 export default function ResgisterProduct({setIsAdminProducts}){
 
@@ -36,7 +38,10 @@ export default function ResgisterProduct({setIsAdminProducts}){
     return(
         <div className='admin-form'>
 
-            <button className="button-cadastro" onClick={() => setIsAdminProducts(true)}>Voltar</button>
+            <button className="button-cadastro" onClick={() => setIsAdminProducts(true)}>
+                <ArrowBackIosRoundedIcon />
+                <p>Voltar</p>
+            </button>
             <p>
                 Preencha as informações do seu produto e aperte em <span className="sublime">criar!</span>
             </p>
@@ -58,7 +63,10 @@ export default function ResgisterProduct({setIsAdminProducts}){
             </label>
             <input  type='file'onChange={ (e) => setImg(e.target.files)}/>
 
-            <button onClick={sendProduct} className='button-cadastro'>Cadastrar</button>
+            <button onClick={sendProduct} className='button-cadastro'>
+                <BorderColorRoundedIcon />
+                <p>Cadastrar</p>
+            </button>
         </div>
     )
 }

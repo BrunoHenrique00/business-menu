@@ -18,10 +18,13 @@ export default function MyShop({usuario}){
             <div className="my-shop-form">
                 <TextField label="Nome" className={{borderColor: 'red'}} variant="outlined"/>
                 <TextField label="Telefone" variant="outlined"/>
-                <TextField label="Cor" variant="outlined"/>
+                {/* <TextField label="Cor" type="color" variant="outlined"/> */}
                 <h2>
                     Escolha apenas uma cor e deixe que cuidamos do resto!
                 </h2>
+                <div className="input-color" >
+                    <input type="color"/>
+                </div>
 
                 <button className="button-cadastro">Alterar</button>
             </div>
