@@ -1,4 +1,7 @@
 const knex = require('../database/index')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+require('dotenv/config')
 
 module.exports.get = async (req, res, next) => {
     try {
@@ -22,10 +25,14 @@ module.exports.get = async (req, res, next) => {
 
 module.exports.adicionaLoja = async (req,res,next) => {
     try{
-        const { nome , numero_telefone  } = req.body
+        const { nome , numero_telefone, password , email } = req.body
 
-        await knex('lojas').insert({ nome , numero_telefone })
-        res.json({ message:'Loja cadastrada com sucesso ' + nome + ' com numero ' + numero_telefone })
+        bcrypt.hash(password , 10, async (errBcrypt , hash) => {
+            if(errBcrypt) return res.status(500).json({error: errBcrypt})
+
+            await knex('lojas').insert({ nome , numero_telefone, password: hash , email  })
+            return res.json({ message:'Loja cadastrada com sucesso: ' + nome})
+        })
     }
     catch (error) {
         next(error)
@@ -56,16 +63,26 @@ module.exports.alteraNomeLoja = async (req,res,next) => {
 
 module.exports.login = async (req,res,next) => {
     try{
-        const nomeLoja = req.body.nome
+        const { email , password } = req.body
         
-        const [ login ] = await knex('lojas').where('nome', nomeLoja)
+        const [ user ] = await knex('lojas').where('email', email)
 
-        if( login ){
-            res.json({
-                id: login.id
+        if(user){
+            bcrypt.compare(password , user.password , (error, result) =>{
+                if(error) return res.status(401).json(error)
+
+                if(result){
+                    const token = jwt.sign({
+                        id: user.id,
+                        email: user.email
+                    }, process.env.JWT_KEY , { expiresIn: "1h"})
+                    return res.json({ token })
+                }
+
+                return res.status(401).json({error: "Falha na autenticação"})
             })
         }else{
-            res.json({
+            res.status(401).json({
                 message: "Informacoes erradas"
             })
         }
