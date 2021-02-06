@@ -195,8 +195,8 @@
     border: none;
     color: #FFFFFF;
     text-align: center;
-    height: 60px;
-    width: 100%;
+    height: 20%;
+    width: 90%;
     font-size: 16px;
     padding: 10px;
     margin: auto;
@@ -231,10 +231,10 @@
 .admin-my-shop{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 90%;
-    height: 90%;
+    height: 100%;
     margin: auto;
 }
 
@@ -248,7 +248,7 @@
     border: 1px solid #787878;
     border-radius: 10px;
     padding: 15px;
-    height: 60%;
+    height: 60vh;
 }
 
 .my-shop-form div, .my-shop-form h2{
@@ -344,5 +344,15 @@
     .btn-alterar{
         font-size: 10px;
         width: 15%;
+    }
+
+    .button-cadastro{
+        height: 13%;
+    }
+}
+
+@media (max-height: 600px){
+    .admin-top{
+        font-size: 12px;
     }
 }
