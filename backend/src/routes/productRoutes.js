@@ -1,15 +1,18 @@
 const express = require('express')
 const routes = express.Router()
+const multerConfig = require('../config/multer')
+const multer = require('multer');
 
 const controller = require('../controllers/produtosController')
+const loginController = require('../middleware/login')
 
 routes.get('/:nomeLoja', controller.produtosPorLoja)
 
-routes.post('/', controller.autenticador , controller.adicionaProduto)
+routes.post('/', multer(multerConfig).single('img'), controller.adicionaProduto)
 
-routes.delete('/:id', controller.autenticador , controller.deletaProduto)
+routes.delete('/:id', loginController , controller.deletaProduto)
 
-routes.put('/', controller.autenticador ,  controller.put)
+routes.put('/:id', loginController , controller.alterarProduto)
 
 
 module.exports = routes

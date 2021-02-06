@@ -26,14 +26,15 @@ module.exports.produtosPorLoja= async (req,res,next) => {
 
 module.exports.adicionaProduto = async (req,res,next) => {
     try{
-        const { nome, descricao, preco, loja_id } = req.body
+        const { nome, descricao, preco } = req.body
         const path_image = req.file.filename
-        
+        const { id } = req.user
+       
         await knex('produtos').insert({ 
             nome, 
             descricao, 
             preco, 
-            loja_id,
+            loja_id: id,
             path_image
         })
         
@@ -50,8 +51,11 @@ module.exports.adicionaProduto = async (req,res,next) => {
 module.exports.deletaProduto = async (req,res,next) => {
     try{
         const { id } = req.params
+        const user_id = req.user.id
 
         const [ produto ]  = await knex('produtos').where('id', id )
+
+        if(produto.loja_id !== user_id) return res.status(401).json({error: "Usuario não tem permissão!"})
 
         fs.unlink(`src/uploads/${produto.path_image}`, async (error) => {
             if(error){
@@ -70,22 +74,26 @@ module.exports.deletaProduto = async (req,res,next) => {
     }
 }
 
-module.exports.put = async (req,res,next) => {
-    res.send('rota PUT')
-}
+module.exports.alterarProduto = async (req,res,next) => {
+    try {
+        const { nome , preco , descricao } = req.body
+        const { id } = req.params
+        const user_id = req.user.id
 
-module.exports.autenticador = async (req,res,next) => {
-    try{
-        const { id } = req.body
-        if( id ){
-            next()
-        }else{
-            return res.json({
-                message: 'ID não verificado'
-            }) 
+        const [ produto ] = await knex('produtos').where('id', id)
+        
+        if(produto.loja_id === user_id){
+            await knex('produtos')
+            .update({
+                nome,
+                preco,
+                descricao
+            }).where('id', id)
+
+            return res.status(200).json({ message: 'Seu produto foi alterado com sucesso!'})
         }
-    }
-    catch(error){
-        next(error) 
+        
+    } catch (error) {
+        next(error)
     }
 }

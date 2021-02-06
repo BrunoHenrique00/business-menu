@@ -4,23 +4,13 @@ const productRoutes = require('./routes/productRoutes.js')
 const lojasRoutes = require('./routes/lojasRoutes.js')
 const cors = require('cors')
 const multer = require('multer')
-const storage = multer.diskStorage({
-
-    destination: (req, file, cb) => {
-        cb(null, 'src/uploads/')
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now()+'-'+file.originalname)
-    }
-})
-const upload = multer({ storage });
+const upload = multer()
 
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // for parsing multipart/form-data
-app.use(upload.single('img'))
 app.use('/uploads', express.static(__dirname + '/uploads'))
 
 app.use('/lojas', lojasRoutes )

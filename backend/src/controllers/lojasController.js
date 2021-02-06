@@ -40,21 +40,36 @@ module.exports.adicionaLoja = async (req,res,next) => {
 } 
 
 module.exports.deletaLoja = async (req,res,next) => {
-    res.send('rota DELETE')
+    try {
+        const { id } = req.user
+
+        await knex('lojas').where('id',id).del()
+
+        return res.status(200).json({message: "Loja deletada com sucesso!"})
+        
+    } catch (error) {
+        next(error)
+    }
 }
 
-module.exports.alteraNomeLoja = async (req,res,next) => {
+module.exports.alterarLoja = async (req,res,next) => {
    try{
-        const id_loja = req.params.id;
-        const novo_nome = req.body.nome
-        await knex('lojas')
-        .update('nome', novo_nome)
-        .where('id', id_loja)
+        const { id } = req.user;
+        const { nome , telefone , cor } = req.body
 
-       return res.json({
-           message: 'Alterado com sucesso :)',
-           novo_nome: novo_nome
-       })
+        await knex('lojas')
+        .update({
+                nome,
+                numero_telefone: telefone,
+                cor
+        }).where('id', id)
+
+        return res.json({
+            message: 'Alterado com sucesso :)',
+            nome,
+            telefone,
+            cor
+        })
     }
     catch (error) {
         next(error)
@@ -95,10 +110,10 @@ module.exports.login = async (req,res,next) => {
 module.exports.numeroLoja = async (req,res,next) => {
     try{
         const  nome  = req.params.nomeLoja
-        const numeroLoja = await knex('lojas').where('nome', nome)
+        const [ loja ] = await knex('lojas').where('nome', nome)
 
         res.json({
-            numero: numeroLoja[0].numero_telefone
+            numero: loja.numero_telefone
         })
      }
      catch (error) {
