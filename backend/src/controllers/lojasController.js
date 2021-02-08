@@ -5,12 +5,13 @@ require('dotenv/config')
 
 module.exports.get = async (req, res, next) => {
     try {
-        const { id } = req.body;
+        const { id , nome } = req.user;
         const produtos  = await knex('produtos').where('loja_id', id)
         
         if(produtos){
             return res.json({
-                produtos: produtos
+                produtos: produtos,
+                nome: nome
             });
         }else{
             res.json({
@@ -89,7 +90,7 @@ module.exports.login = async (req,res,next) => {
                 if(result){
                     const token = jwt.sign({
                         id: user.id,
-                        email: user.email
+                        nome: user.nome
                     }, process.env.JWT_KEY , { expiresIn: "1h"})
                     return res.json({ token })
                 }
@@ -113,7 +114,9 @@ module.exports.numeroLoja = async (req,res,next) => {
         const [ loja ] = await knex('lojas').where('nome', nome)
 
         res.json({
-            numero: loja.numero_telefone
+            numero: loja.numero_telefone,
+            cor: loja.cor,
+            nome: loja.nome
         })
      }
      catch (error) {

@@ -37,7 +37,7 @@ module.exports = {
                 cb(new Error("Invalid file Type."))
             }
         } catch (error) {
-            cb( new Error("Usuario nao autenticado para imagem"))
+            cb( new Error(error))
         }
     } 
 }

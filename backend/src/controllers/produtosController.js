@@ -4,12 +4,13 @@ const fs = require('fs')
 module.exports.produtosPorLoja= async (req,res,next) => {
     try{
         const { nomeLoja } = req.params
-        const resultadoLoja = await knex('lojas').where('nome', nomeLoja)
+        const [ resultadoLoja ] = await knex('lojas').where('nome', nomeLoja)
         
-        if(resultadoLoja[0]){
-            const resultadoProdutos = await knex('produtos').where('loja_id', resultadoLoja[0].id)
+        if(resultadoLoja){
+            const resultadoProdutos = await knex('produtos').where('loja_id', resultadoLoja.id)
             return res.json({
-                nomeLoja: nomeLoja,
+                nomeLoja: resultadoLoja.nome,
+                cor: resultadoLoja.cor,
                 produtos: resultadoProdutos
             })
         }
