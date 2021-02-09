@@ -5,6 +5,7 @@ const lojasRoutes = require('./routes/lojasRoutes.js')
 const cors = require('cors')
 const multer = require('multer')
 const upload = multer()
+require('dotenv/config')
 
 app.use(cors())
 app.use(express.json())
