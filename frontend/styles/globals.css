@@ -24,7 +24,7 @@ a {
 
 .button-flex{
   margin: auto;
-  width: 30%;
+  width: 100%;
 
   display: flex;
   
@@ -36,9 +36,9 @@ a {
 
 /* CSS DA CAIXA DO PRODUTO */
 
-/* .product-info {
+.product-info {
   min-width: 50%;
-} */
+}
 
 /* CSS DO BUTAO VEJA MAIS */
 .button {

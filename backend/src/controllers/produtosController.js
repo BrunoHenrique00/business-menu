@@ -3,8 +3,8 @@ const fs = require('fs')
 
 module.exports.produtosPorLoja= async (req,res,next) => {
     try{
-        const { nomeLoja } = req.params
-        const [ resultadoLoja ] = await knex('lojas').where('nome', nomeLoja)
+        const { id } = req.params
+        const [ resultadoLoja ] = await knex('lojas').where('id', id)
         
         if(resultadoLoja){
             const resultadoProdutos = await knex('produtos').where('loja_id', resultadoLoja.id)
@@ -13,11 +13,10 @@ module.exports.produtosPorLoja= async (req,res,next) => {
                 cor: resultadoLoja.cor,
                 produtos: resultadoProdutos
             })
-        }
-        else{
+        } else {
             return res.json({
                 error: 'Não encontramos a sua loja >.<'
-            });
+        });
         } 
     }
     catch (error) {

@@ -1,5 +1,6 @@
 const multer = require('multer')
 const jwt = require('jsonwebtoken')
+const { stripeFilterImage } = require('../middleware/stripe')
 
 module.exports = {
     storage: multer.diskStorage({
@@ -14,7 +15,7 @@ module.exports = {
     limits: {
         fileSize: 2 * 1024 * 1024,
     },
-    fileFilter: (req, file, cb) =>{
+    fileFilter: async (req, file, cb) =>{
 
         const allowedMimes = [
             'image/jpeg',
@@ -30,6 +31,13 @@ module.exports = {
             if(!preco || !nome || !descricao){
                 cb(new Error("Faltam informações do produto!"))
             }
+
+            const assinatura  = await stripeFilterImage( {user: decoded} )
+
+            if(!assinatura){
+                cb(new Error("Usuario não tem assinatura!"))
+            }
+
             if(decoded && allowedMimes.includes(file.mimetype)){
                 req.user = decoded
                 cb(null, true)

@@ -1,5 +1,6 @@
 import { useState, useEffect} from 'react'
 import { useRouter } from 'next/router';
+import Head from 'next/head'
 //Components
 import AdminProducts from '../components/AdminProducts'
 import RegisterProduct from '../components/RegisterProduct'
@@ -11,30 +12,6 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export default function Admin() {
 
-    useEffect(() =>{
-        getProducts()
-        setUsuario(localStorage.getItem('nome_usuario'))
-    }, [])
-
-    async function getProducts(){
-        const lojaId = localStorage.getItem('id_usuario')
-
-        if(!lojaId){
-            window.alert('Ops, você não está autenticado!')
-            router.push('/')
-        }else{
-            const data = await fetch(`http://localhost:3001/lojas/`,{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({id: lojaId})
-                }) 
-            const json = await data.json()
-            setProdutos(json.produtos)
-        }
-    }
-
     // Router
     const router = useRouter()
     // Product states
@@ -43,9 +20,59 @@ export default function Admin() {
     // Navigation States
     const [isAdminProducts, setIsAdminProducts] = useState(true)
     const [isAdminInShop, SetIsAdminInShop] = useState(false)
+    const [isPaid, setIsPaid] = useState(false)
+
+    async function getProducts(){
+        const token = localStorage.getItem('token')
+
+        if(!token){
+            window.alert('Ops, você não está autenticado!')
+            router.push('/login')
+        }else{
+            const data = await fetch(`http://localhost:3001/lojas/`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({token: token})
+                }) 
+            const json = await data.json()
+            if(json.error){
+                alert('Algo deu errado, por favor faça o login novamente!')
+                router.push('/login')
+                return null
+            }
+            setProdutos(json.produtos)
+            setUsuario(json.nome)
+        }
+    }
+
+    async function checkPayment(){
+        const response = await fetch(`http://localhost:3001/lojas/assinatura`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                token: localStorage.getItem('token')
+            })
+        })
+        const { isPaid } = await response.json()
+        if(isPaid === 'active'){
+            setIsPaid(true)
+        }
+    }
+
+    useEffect(() =>{
+        getProducts()
+        checkPayment()
+    }, [])
 
     return (
       <>
+        <Head>
+            <title>Cardapiú - Admin</title>
+        </Head>
         <div className="container-admin">
             <div className="navbar-admin">
                 <img src="/logo.svg" />
@@ -79,9 +106,9 @@ export default function Admin() {
                     <p>Olá <span className="sublime">{`${usuario}`}</span>, seja bem vindo!</p>
                 </div>
 
-                {isAdminProducts && !isAdminInShop && <AdminProducts produtos={produtos} setIsAdminProducts={setIsAdminProducts}/>}
+                {isAdminProducts && !isAdminInShop && <AdminProducts produtos={produtos} setIsAdminProducts={setIsAdminProducts} isPaid={isPaid}/>}
                 {!isAdminProducts && !isAdminInShop &&<RegisterProduct setIsAdminProducts={setIsAdminProducts}/>}
-                {isAdminInShop && <Myshop usuario={usuario} />}
+                {isAdminInShop && <Myshop usuario={usuario} isPaid={isPaid} />}
 
             </div>
         </div>

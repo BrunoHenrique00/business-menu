@@ -5,7 +5,7 @@ exports.up = knex => knex.schema.createTable('lojas', table => {
     table.integer('numero_telefone').notNullable()
     table.string('password').notNullable()
     table.string('email').unique().notNullable()
-    table.boolean('subscription').defaultTo(false).notNullable()
+    table.string('id_stripe', [255]).notNullable()
     table.string('cor', [7]).defaultTo('#5700B8')
     
 })

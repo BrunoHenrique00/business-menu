@@ -1,9 +1,13 @@
 import Link from "next/link";
+import Head from 'next/head'
 import { useCarrinho } from '../../../context/Carrinho'
+import lightOrDark from '../../../functions/lightOrDark'
+import IconButton from '@material-ui/core/IconButton';
 
-function Produto({titulo, preco, path_image, nomeLoja, descricao, addCart , removeCart}){
+
+function Produto({titulo, preco, path_image, nomeLoja, descricao, addCart , removeCart, cor}){
   return(
-      <div className="product-container flex">
+      <div className="product-container flex" style={{border: `1px solid ${cor}` }}>
         <img className="product-img" src={`http://localhost:3001/uploads/${path_image}`} />
         <div className="product-info">
           <h2>{titulo}</h2>
@@ -26,18 +30,21 @@ function Produto({titulo, preco, path_image, nomeLoja, descricao, addCart , remo
               </span>
             </Link>
           </button> */}
-      {/* <div className='button-flex'>
-        <button className='button-adicionar' onClick={() => addCart(titulo, preco)}>+</button>
-        <button className='button-adicionar'onClick={()=> removeCart(titulo)}>-</button>
-      </div> */}
+      <div className='button-flex'>
+        <IconButton onClick={() => addCart(titulo, preco)}>
+          +
+        </IconButton>
+        <IconButton onClick={()=> removeCart(titulo)}>-</IconButton>
+      </div>
         </div>
       </div>
   )
 }
 
-export default function Home({nomeLoja, produtos, path_image, error}) {
+export default function Home({nomeLoja = 'Cardapiu', produtos, cor, error , theme}) {
 
   const { carrinho , setCarrinho }  = useCarrinho()
+  // const { theme , setTheme } = useState('light')
   
   function addCart(nome, preco){
     setCarrinho([
@@ -65,8 +72,11 @@ export default function Home({nomeLoja, produtos, path_image, error}) {
 
   return (
     <>
-    <div className="navbar-loja">
-        <h2 className="nome-loja">{nomeLoja}</h2>
+    <Head>
+      <title>{nomeLoja}</title>
+    </Head>
+    <div className={`navbar-loja ${theme === "light" ? 'dark-text': 'light-text'}`} style={{backgroundColor: cor}}>
+        <h2 className='nome-loja'>{nomeLoja}</h2>
         <Link
         href={
           { 
@@ -93,6 +103,7 @@ export default function Home({nomeLoja, produtos, path_image, error}) {
           descricao={produto.descricao}
           addCart={addCart}
           removeCart={removeCart}
+          cor={cor}
           />
           )}
         </div>
@@ -116,11 +127,13 @@ export async function getServerSideProps({params}) {
   if(json.produtos){
     return {
       props: {
-        nomeLoja: params.nomeloja,
-        produtos: json.produtos
+        nomeLoja: json.nomeLoja,
+        produtos: json.produtos,
+        cor: json.cor,
+        theme: lightOrDark(json.cor)
       }, 
     }
-  }else{
+  }else if(json.error){
     return {
       props: {
         error: json.error

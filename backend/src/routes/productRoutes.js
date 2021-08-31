@@ -5,8 +5,9 @@ const multer = require('multer');
 
 const controller = require('../controllers/produtosController')
 const loginController = require('../middleware/login')
+const { stripeFilter } = require('../middleware/stripe')
 
-routes.get('/:nomeLoja', controller.produtosPorLoja)
+routes.get('/:id', stripeFilter , controller.produtosPorLoja)
 
 routes.post('/', multer(multerConfig).single('img'), controller.adicionaProduto)
 

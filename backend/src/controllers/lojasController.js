@@ -2,6 +2,8 @@ const knex = require('../database/index')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 require('dotenv/config')
+const Stripe = require('stripe')
+const stripe = Stripe(process.env.STRIPE_API_KEY)
 
 module.exports.get = async (req, res, next) => {
     try {
@@ -28,10 +30,23 @@ module.exports.adicionaLoja = async (req,res,next) => {
     try{
         const { nome , numero_telefone, password , email } = req.body
 
+        const customer = await stripe.customers.create({
+            email: email,
+            phone: numero_telefone
+        })
+
+        if(!customer.id) return res.status(500).json({error: "Algo deu errado, tente novamente!"})
+
         bcrypt.hash(password , 10, async (errBcrypt , hash) => {
             if(errBcrypt) return res.status(500).json({error: errBcrypt})
 
-            await knex('lojas').insert({ nome , numero_telefone, password: hash , email  })
+            await knex('lojas').insert({ 
+                nome,
+                numero_telefone,
+                password: hash,
+                email,
+                id_stripe: customer.id
+            })
             return res.json({ message:'Loja cadastrada com sucesso: ' + nome})
         })
     }
@@ -116,10 +131,73 @@ module.exports.numeroLoja = async (req,res,next) => {
         res.json({
             numero: loja.numero_telefone,
             cor: loja.cor,
-            nome: loja.nome
+            nome: loja.nome,
+            id: loja.id
         })
      }
      catch (error) {
          next(error)
      }
 }
+
+module.exports.getPortalStripe = async (req, res, next) => {
+    try {
+        const { id } = req.user
+
+        const [ user ] = await knex('lojas').where('id' , id)
+
+        const { url }  = await stripe.billingPortal.sessions.create({
+            customer: user.id_stripe,
+            return_url: 'http://localhost:3000/admin',
+        });
+
+        return res.json({ url: url })
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports.payment = async (req, res, next) => {
+    try {
+
+        const { id } = req.user
+
+        const [ user ] = await knex('lojas').where('id' , id)
+
+        const checkout = await stripe.checkout.sessions.create({
+            mode: "subscription",
+            customer: user.id_stripe,
+            payment_method_types: ["card"],
+            line_items: [
+              {price: 'price_1IIggBJYoInUDvqKALhNxi3D', quantity: 1},
+            ],
+            success_url: 'http://localhost:3000/admin',
+            cancel_url: 'http://localhost:3000/login',
+        });
+
+        return res.json({id: checkout.id})
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports.getAssinatura = async (req, res, next) => {
+    try {
+
+        const { id } = req.user
+
+        const [ user ] = await knex('lojas').where('id' , id)
+
+        const customer = await stripe.customers.retrieve(user.id_stripe , {
+            expand: ['subscriptions'],
+        });
+
+        return res.json({isPaid: customer.subscriptions.data[0].status})
+
+    } catch (error) {
+        next(error)
+    }
+}
+

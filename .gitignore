@@ -1,5 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
+/backend/src/uploads/*
+/backend/src/database/.db
 # dependencies
 /backend/node_modules
 /backend/.env

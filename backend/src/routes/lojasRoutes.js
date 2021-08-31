@@ -15,4 +15,10 @@ routes.put('/', loginController , controller.alterarLoja)
 
 routes.post('/login', controller.login)
 
+routes.post('/subscription', loginController , controller.getPortalStripe)
+
+routes.post('/payment', loginController , controller.payment)
+
+routes.post('/assinatura', loginController , controller.getAssinatura)
+
 module.exports = routes
