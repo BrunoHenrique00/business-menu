@@ -45,6 +45,9 @@ O Cardápiu consiste em uma aplicação para pequenos e médios empreendedores t
 ![](https://i.imgur.com/jZyAhVb.png)
 ![](https://i.imgur.com/d3omVwG.png)
 
+## Dashboard Responsive
+![](https://i.imgur.com/98QbxZ2.png)
+
 ## Vitrine Online
 ![](https://i.imgur.com/uraE3su.png)
 ![](https://i.imgur.com/sbFxf6N.png)
