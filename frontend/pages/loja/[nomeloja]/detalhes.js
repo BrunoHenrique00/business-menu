@@ -10,7 +10,7 @@ export default function Home() {
       <>
 
       <div className="navbar">
-        <h1 className="business-menu">Business Menu</h1>
+        <h1 className="business-menu">Business</h1>
         <Link href={`/loja/${nomeloja}`}> 
           <a className="carrinho-voltar">Voltar</a>
         </Link>
